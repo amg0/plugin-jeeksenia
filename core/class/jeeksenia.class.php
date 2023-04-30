@@ -350,6 +350,19 @@ public static function deamon_changeAutoMode($mode) {
 	public function updateConfigurationFromKsenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
+		/*
+		<generalInfo>
+		<productName>KSENIA lares 16IP</productName>
+		<productHighRevision>1</productHighRevision>
+		<productLowRevision>6</productLowRevision>
+		<productBuildRevision>1265</productBuildRevision>
+		<webServerFW>1.0.0.15</webServerFW>
+		<webServerHTML>1.1.30</webServerHTML>
+		<info1>Sécurité Vol Feu</info1>
+		<info2>04 38 24 02 15</info2>
+		<timestamp>1682886566</timestamp>
+		</generalInfo>
+		*/
 		return true; 
 	}
 
