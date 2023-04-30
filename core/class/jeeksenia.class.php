@@ -361,7 +361,7 @@ public static function deamon_changeAutoMode($mode) {
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
 		$this->checkAndUpdateCmd('status', 1);
 		$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
-		$this->checkAndUpdateCmd('productversion', (string) sprintf('%s.%s.%s',$xml->productHighRevision[0],$xml->productLowRevision[0],$xml->productBuildRevision[0]));
+		$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
 
 		/*
 		<generalInfo>
