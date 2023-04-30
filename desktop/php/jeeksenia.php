@@ -172,7 +172,6 @@ sendVarToJS('eqType', $plugin->getId());
 									<label class="col-sm-4 control-label">Actions</label>
 									<div class="col-sm-6 btn-group" role="group" aria-label="...">
 										<button id="jeeksenia-testurl" type="button" class="btn btn-default"><i id="jeeksenia-testurlok" class="fas fa-check"></i> Test Access</button>
-										<button id="jeeksenia-configpush" type="button" class="btn btn-default"><i id="jeeksenia-configpushok" class="fas fa-check"></i> Config Push</button>
 									</div>
 								</div>
 							</div>
