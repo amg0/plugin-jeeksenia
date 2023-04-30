@@ -1,0 +1,27 @@
+{
+	"id" : "jeeksenia",
+	"name" : "Jeeksenia",
+	"description" : {
+		"fr_FR": "Plugin pour interfacer KSenia Lares 128 avec Jeedom"
+	},
+	"licence" : "AGPL",
+	"author" : "amg0",
+	"require" : "4.3.17",
+	"category" : "home automation protocol",
+	"hasDependency" : false,
+	"hasOwnDeamon" : true,
+	"maxDependancyInstallTime" : 0,
+	"changelog" : "https://amg0.github.io/plugin-jeeksenia/#language#/changelog",
+	"documentation" : "https://amg0.github.io/plugin-jeeksenia/#language#/",
+	"changelog_beta" : "https://amg0.github.io/plugin-jeeksenia/#language#/beta/changelog",
+	"documentation_beta" : "https://amg0.github.io/plugin-jeeksenia/#language#/beta/",
+	"link" : {
+		"forum":"Lien vers le forum",
+		"video" : "Lien vers une video"
+	},
+	"language": [
+		"fr_FR",
+		"en_US"
+	],
+	"compatibility": ""
+}
