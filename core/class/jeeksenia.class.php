@@ -265,16 +265,19 @@ public static function deamon_changeAutoMode($mode) {
 	}
 
 	// get root URL of the IPX800 finishing by a /
-	public function getUrl() {
+	private function getUrl() {
 		$url = 'http://';
-		if ($this->getConfiguration('username') != '') {
-			$url .= $this->getConfiguration('username') . ':' . $this->getConfiguration('password') . '@';
-		}
 		$url .= $this->getConfiguration('ipaddr');
 		if ($this->getConfiguration('port') != '') {
 			$url .= ':' . $this->getConfiguration('port');
 		}
 		return $url."/";
+	}
+
+	private function getCredentials() {
+		$user = $this->getConfiguration('username',null);
+		$pwd = $this->getConfiguration('password',null);
+		return $user.':'.$pwd ;//'Authorization: Basic '. base64_encode( $user .':' . $pwd);
 	}
 
 	// return eqlogic's icon
@@ -293,18 +296,61 @@ public static function deamon_changeAutoMode($mode) {
 	// http://192.168.0.9/core/api/jeeApi.php?apikey=xxxx&type=event&plugin=jeeksenia&id=3912&mac=$M&I=$I&O=$O&A=$A
 	public function event() 
 	{
-		//log::add(JEEKSENIA, 'debug', __METHOD__ .' eqlogic id:'.init('id'));
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' $_GET:'.json_encode($_GET));
 		//log::add(JEEKSENIA, 'debug', __METHOD__ .' $_POST:'.json_encode($_POST));
 		//log::add(JEEKSENIA, 'debug', __METHOD__ .' $_REQUEST:'.json_encode($_REQUEST));
-
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' eqlogic id:'.init('id'));
 	}
 	
-	
+	private function KSeniaHttpCall($action) {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		$ch = curl_init();
+
+		curl_setopt_array($ch, [
+			CURLOPT_URL => $this->getUrl() . $action,		// set the url
+			CURLOPT_RETURNTRANSFER => true,					// return the transfer as a string
+			CURLOPT_HTTPHEADER => [
+				'Content-Type: application/xml',
+				'Authorization: Basic '. base64_encode($this->getCredentials())
+			],
+			//CURLOPT_TIMEOUT => 30
+		]);		
+
+        $result = array();
+		$result['response'] = curl_exec($ch);							// output string
+		$result['http_code'] = curl_getinfo($ch,CURLINFO_HTTP_CODE);	// HTTP Return code
+		$result['ok'] =  ($result['response'] !== false) && ($result['http_code'] == 200) ;
+		if ( ! $result['ok'] ) {
+			$result['curl_error'] = curl_error($ch);
+			log::add(JEEKSENIA, 'error', __METHOD__ .' Http code: ' . $result['http_code']  . ' Curl error: ' . $result['curl_error']);
+		} 
+		// $header_size = curl_getinfo($ch,CURLINFO_HEADER_SIZE);
+		// $result['header'] = substr($response, 0, $header_size);
+        // $result['body'] = substr( $response, $header_size );
+        //$result['last_url'] = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL);
+
+		curl_close($ch);		// close curl resource to free up system resources
+		return $result;
+	}
+
+	private function xmlKSeniaHttpCall($actionxml) {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		$result = $this->KSeniaHttpCall($actionxml);
+		if (!$result['ok']) {
+			return null;
+		}
+		return simplexml_load_string( $result['response'] );
+	}
+
+	public function refreshFromKSenia() {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		return null;
+	}
 
 	public function updateConfigurationFromKsenia() {
-		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());  
-		return; 
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
+		return true; 
 	}
 
 	public function createOrUpdateChildEQ($category,$type,$child,$enable=0,$visible=0,$name=null) {
