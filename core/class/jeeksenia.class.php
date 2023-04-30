@@ -186,6 +186,7 @@ public static function deamon_changeAutoMode($mode) {
 			default: {  // Root Equipment
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				break;
 			}
 		}
@@ -360,6 +361,8 @@ public static function deamon_changeAutoMode($mode) {
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
 		$this->checkAndUpdateCmd('status', 1);
 		$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
+		$this->checkAndUpdateCmd('productversion', (string) sprintf('%s.%s.%s',$xml->productHighRevision[0],$xml->productLowRevision[0],$xml->productBuildRevision[0]));
+
 		/*
 		<generalInfo>
 		<productName>KSENIA lares 16IP</productName>

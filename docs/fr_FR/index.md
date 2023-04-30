@@ -12,6 +12,7 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 
 KSenia Root equipment
 - **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares 16IP
+- **Product Version** : return the KSenia product version : High.Low.Build
 
 ## Change Log
 
