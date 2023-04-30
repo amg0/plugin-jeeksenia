@@ -359,7 +359,7 @@ public static function deamon_changeAutoMode($mode) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
 		$this->checkAndUpdateCmd('status', 1);
-		$this->checkAndUpdateCmd('productname', $xml->productName[0]);
+		$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
 		/*
 		<generalInfo>
 		<productName>KSENIA lares 16IP</productName>
