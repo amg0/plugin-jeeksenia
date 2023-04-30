@@ -14,6 +14,9 @@ KSenia Root equipment
 - **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares 16IP
 - **Product Version** : return the KSenia product version : High.Low.Build
 
+KSenia Zone equipment
+- **Présence** : detection de présence ( 1 ) ou abscense (0 )
+
 ## Change Log
 
 [Change Log](changelog.md)

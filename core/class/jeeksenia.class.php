@@ -183,6 +183,7 @@ public static function deamon_changeAutoMode($mode) {
 		$type = $this->getConfiguration('type',null);
 		switch($type) {
 			case 'zone': {
+				$this->createOrUpdateCommand( __('Présence',__FILE__), 'presence', 'info', 'binary', 1, 'PRESENCE','timePresence' );
 				break;
 			}
 			default: {  // Root Equipment
@@ -394,7 +395,7 @@ public static function deamon_changeAutoMode($mode) {
 	}
 
 	public function createOrUpdateChildEQ($category,$type,$child,$enable=0,$visible=0,$name=null) {
-		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d child:%s',$this->getId(),$child));
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d child:%s name:%s',$this->getId(),$chil,$name??''));
 		//$child = ;
 		$eqLogic = self::byLogicalId( $this->buildLogicalID($child) , JEEKSENIA);
 
@@ -427,7 +428,7 @@ public static function deamon_changeAutoMode($mode) {
 		}
 	} */
 
-	public function createOrUpdateCommand( $name, $logicalid, $type, $subtype, $is_visible, $generic_type, $targetcmdid=NULL) {
+	public function createOrUpdateCommand( $name, $logicalid, $type, $subtype, $is_visible, $generic_type, $template=null, $targetcmdid=null) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' name:' . $name);
 		$cmd = $this->getCmd(null, $logicalid);
 		if (!is_object($cmd)) {
@@ -443,6 +444,10 @@ public static function deamon_changeAutoMode($mode) {
 			if (!is_null($targetcmdid)) {
 				$cmd->setValue( (int) $targetcmdid );
 			} 
+			if (!is_null($template)) {
+				$cmd->setTemplate('dashboard',$item->template );    //template pour le dashboard
+				$cmd->setTemplate('mobile',$item->template );    //template pour le dashboard
+			}
 			// $cmd->setUnite('');
 			// $cmd->setIsHistorized(0);
 			$cmd->save();
