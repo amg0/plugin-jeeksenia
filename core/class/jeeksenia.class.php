@@ -363,17 +363,18 @@ public static function deamon_changeAutoMode($mode) {
 		$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
 		/*
 		<generalInfo>
-		<productName>KSENIA lares 16IP</productName>
-		<productHighRevision>1</productHighRevision>
-		<productLowRevision>6</productLowRevision>
-		<productBuildRevision>1265</productBuildRevision>
-		<webServerFW>1.0.0.15</webServerFW>
-		<webServerHTML>1.1.30</webServerHTML>
-		<info1>Sécurité Vol Feu</info1>
-		<info2>04 38 24 02 15</info2>
-		<timestamp>1682886566</timestamp>
+			<productName>KSENIA lares 16IP</productName>
+			<productHighRevision>1</productHighRevision>
+			<productLowRevision>6</productLowRevision>
+			<productBuildRevision>1265</productBuildRevision>
+			<webServerFW>1.0.0.15</webServerFW>
+			<webServerHTML>1.1.30</webServerHTML>
+			<info1>Sécurité Vol Feu</info1>
+			<info2>04 38 24 02 15</info2>
+			<timestamp>1682886566</timestamp>
 		</generalInfo>
 		*/
+		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesDescription16IP.xml");
 		return true; 
 	}
 
