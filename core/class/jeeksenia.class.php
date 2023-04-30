@@ -303,14 +303,15 @@ public static function deamon_changeAutoMode($mode) {
 	}
 	
 	private function KSeniaHttpCall($action) {
-		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		$url = $this->getUrl() . $action;
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s url:%s',$this->getId(),$url ));
 		$ch = curl_init();
 
 		curl_setopt_array($ch, [
-			CURLOPT_URL => $this->getUrl() . $action,		// set the url
-			CURLOPT_RETURNTRANSFER => true,					// return the transfer as a string
-			CURLOPT_HTTPHEADER => [
-				'Content-Type: application/xml',
+			CURLOPT_URL => $url ,					// set the url
+			CURLOPT_RETURNTRANSFER => true,			// return the transfer as a string
+			CURLOPT_HTTPHEADER => [					// headers
+//				'Content-Type: application/xml',
 				'Authorization: Basic '. base64_encode($this->getCredentials())
 			],
 			//CURLOPT_TIMEOUT => 30
@@ -325,6 +326,7 @@ public static function deamon_changeAutoMode($mode) {
 			$result['curl_error'] = curl_error($ch);
 			log::add(JEEKSENIA, 'error', __METHOD__ .' Http code: ' . $result['http_code']  . ' Curl error: ' . $result['curl_error']);
 		} else {
+			log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' response:%s',$result['response']));
 			$this->checkAndUpdateCmd('status', 1);
 		}
 		// $header_size = curl_getinfo($ch,CURLINFO_HEADER_SIZE);
@@ -337,7 +339,7 @@ public static function deamon_changeAutoMode($mode) {
 	}
 
 	private function xmlKSeniaHttpCall($actionxml) {
-		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s action:%s',$actionxml));
 		$result = $this->KSeniaHttpCall($actionxml);
 		if (!$result['ok']) {
 			return null;
