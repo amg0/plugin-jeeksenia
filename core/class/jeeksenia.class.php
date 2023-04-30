@@ -321,9 +321,12 @@ public static function deamon_changeAutoMode($mode) {
 		$result['http_code'] = curl_getinfo($ch,CURLINFO_HTTP_CODE);	// HTTP Return code
 		$result['ok'] =  ($result['response'] !== false) && ($result['http_code'] == 200) ;
 		if ( ! $result['ok'] ) {
+			$this->checkAndUpdateCmd('status', 0);
 			$result['curl_error'] = curl_error($ch);
 			log::add(JEEKSENIA, 'error', __METHOD__ .' Http code: ' . $result['http_code']  . ' Curl error: ' . $result['curl_error']);
-		} 
+		} else {
+			$this->checkAndUpdateCmd('status', 1);
+		}
 		// $header_size = curl_getinfo($ch,CURLINFO_HEADER_SIZE);
 		// $result['header'] = substr($response, 0, $header_size);
         // $result['body'] = substr( $response, $header_size );
