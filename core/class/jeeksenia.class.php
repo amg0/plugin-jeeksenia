@@ -182,7 +182,9 @@ public static function deamon_changeAutoMode($mode) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$type = $this->getConfiguration('type',null);
 		switch($type) {
-
+			case 'zone': {
+				break;
+			}
 			default: {  // Root Equipment
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
@@ -359,8 +361,6 @@ public static function deamon_changeAutoMode($mode) {
 	public function updateConfigurationFromKsenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
-		$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
-		$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
 		/*
 		<generalInfo>
 			<productName>KSENIA lares 16IP</productName>
@@ -374,7 +374,22 @@ public static function deamon_changeAutoMode($mode) {
 			<timestamp>1682886566</timestamp>
 		</generalInfo>
 		*/
+		if (is_object($xml)) {
+			$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
+			$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
+		}
+
 		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesDescription16IP.xml");
+		/*
+		<?xml version="1.0" encoding="ISO-8859-1"?> <zonesDescription>     <zone>IR hall d&#39;entr?e</zone>     <zone>IR sejour</zone>     <zone>IR bureau</zone>     <zone>IR chambre s.sol</zone>     <zone>IR buanderie</zone>     <zone>VX Cot? bureau</zone>     <zone>IR Salle de Gym</zone>     <zone>IRR chambre parent</zone>     <zone>IRR chambre ?tage</zone>     <zone>CTR bureau gauche</zone>     <zone>CTR bureau droite</zone>     <zone>CTR SDB parent velux droit</zone>     <zone>CTR SDB ?tage</zone>     <zone>VX Entr?e devant</zone>     <zone>VX Entr?e arri?re</zone>     <zone>CTR SDB parent velux gauche</zone> </zonesDescription>
+		*/
+		if (is_object($xml)) {
+			$arr = $xml->xpath("//zone");
+			foreach( $arr as $key=>$zone ) {
+				$this->createOrUpdateChildEQ('security','zone',"Z".$key,1,1,$zone);
+			}
+		}
+
 		return true; 
 	}
 
