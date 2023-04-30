@@ -445,8 +445,8 @@ public static function deamon_changeAutoMode($mode) {
 				$cmd->setValue( (int) $targetcmdid );
 			} 
 			if (!is_null($template)) {
-				$cmd->setTemplate('dashboard',$item->template );    //template pour le dashboard
-				$cmd->setTemplate('mobile',$item->template );    //template pour le dashboard
+				$cmd->setTemplate('dashboard',$template );    //template pour le dashboard
+				$cmd->setTemplate('mobile',$template );    //template pour le dashboard
 			}
 			// $cmd->setUnite('');
 			// $cmd->setIsHistorized(0);
