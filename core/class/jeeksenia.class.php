@@ -344,7 +344,10 @@ public static function deamon_changeAutoMode($mode) {
 		if (!$result['ok']) {
 			return null;
 		}
-		return simplexml_load_string( $result['response'] );
+		$xml = simplexml_load_string( $result['response'] );
+		$json = json_decode(json_encode($xml));
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' result:%s',json_encode($json)));
+		return $json;
 	}
 
 	public function refreshFromKSenia() {
