@@ -185,6 +185,7 @@ public static function deamon_changeAutoMode($mode) {
 
 			default: {  // Root Equipment
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
+				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				break;
 			}
 		}
@@ -345,9 +346,8 @@ public static function deamon_changeAutoMode($mode) {
 			return null;
 		}
 		$xml = simplexml_load_string( $result['response'] );
-		$json = json_decode(json_encode($xml));
-		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' result:%s',json_encode($json)));
-		return $json;
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' result:%s',json_encode($xml)));
+		return $xml;
 	}
 
 	public function refreshFromKSenia() {
@@ -358,6 +358,8 @@ public static function deamon_changeAutoMode($mode) {
 	public function updateConfigurationFromKsenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
+		$this->checkAndUpdateCmd('status', 1);
+		$this->checkAndUpdateCmd('productname', $xml->productName[0]);
 		/*
 		<generalInfo>
 		<productName>KSENIA lares 16IP</productName>
