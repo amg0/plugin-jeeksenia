@@ -46,7 +46,7 @@ public static function daemon() {
 
 	// for all root equipments
 	foreach (self::byType(JEEKSENIA) as $eqLogic) {
-		// only the root equipment must refresh data from the IPX
+		// only the root equipment must refresh data from the KSENIA
 		if (is_null( $eqLogic->getConfiguration('type',null) )) {
 			$eqLogic->refreshFromKSenia();
 		}
@@ -165,7 +165,7 @@ public static function deamon_changeAutoMode($mode) {
 	public function postUpdate() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 
-		// do this only for update such that the initial parameters are set ( ipaddr etc ) and comm can happen with IPX
+		// do this only for update such that the initial parameters are set ( ipaddr etc ) and comm can happen with KSENIA
 		$type = $this->getConfiguration('type',null);
 		if (is_null($type)) {
 			$this->updateConfigurationFromKsenia();
@@ -247,7 +247,7 @@ public static function deamon_changeAutoMode($mode) {
 	*/
 
 	// Logical ID for child equipment
-	// rootid_xxxn xxx is ipx class and n is the index
+	// rootid_xxxn xxx is ksenia class and n is the index
 	public function buildLogicalID($suffix) {
 		return $this->getId()."_".$suffix;
 	}
