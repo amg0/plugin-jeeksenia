@@ -356,7 +356,7 @@ public static function deamon_changeAutoMode($mode) {
 	private function updateChildEQStatus($idx,$status,$bypass) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s idx:%s status:%s bypass:%s',$this->getId(),$idx,$status,$bypass));
 		$root = $this->getId();
-		$eqLogic = self::byLogicalId(buildLogicalID('Z'.$idx), JEEKSENIA);
+		$eqLogic = self::byLogicalId($this->buildLogicalID('Z'.$idx), JEEKSENIA);
 		if ( is_object($eqLogic) ) {
 			$eqLogic->checkAndUpdateCmd('presence', ($status=="NORMAL") ? 0 : 1);
 			$eqLogic->checkAndUpdateCmd('status', ($status=="LOST") ? "LOST" : $bypass);
