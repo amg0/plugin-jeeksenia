@@ -444,7 +444,7 @@ public static function deamon_changeAutoMode($mode) {
 			$arr = $xml->xpath("//scenario");
 			foreach ($arr as $idx=>$sc_descr) {
 				if ((string)$sc_descr->abil == "TRUE") {					
-					$result['S_'.$idx]=[ 'id'=>$idx, 'name'=>$scenario_names[$idx] ];
+					$result['S_'.$idx]=[ 'id'=>$idx, 'name'=>(string)$scenario_names[$idx] ];
 					$this->createOrUpdateCommand( $scenario_names[$idx], 'S_'.$idx, 'action', 'other', 1, 'GENERIC_ACTION' );
 				}
 			}
