@@ -334,7 +334,7 @@ public static function deamon_changeAutoMode($mode) {
 		// $header_size = curl_getinfo($ch,CURLINFO_HEADER_SIZE);
 		// $result['header'] = substr($response, 0, $header_size);
         // $result['body'] = substr( $response, $header_size );
-        //$result['last_url'] = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL);
+        // $result['last_url'] = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL);
 
 		curl_close($ch);		// close curl resource to free up system resources
 		return $result;
