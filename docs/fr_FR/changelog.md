@@ -7,6 +7,7 @@
 ## 01/05/2023
 
 - Update Child equipment with the KSenia Zone status
+- Présence : commande sur l'equipement root pour compter le nombre de zone avec detection de mouvement confirmée
 
 ## 30/04/2023
 

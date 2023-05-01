@@ -189,6 +189,7 @@ public static function deamon_changeAutoMode($mode) {
 			}
 			default: {  // Root Equipment
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
+				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'numeric', 1, 'PRESENCE',true );
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				break;
@@ -355,14 +356,15 @@ public static function deamon_changeAutoMode($mode) {
 
 	private function updateChildEQStatus($idx,string $status,string $bypass) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s idx:%s status:%s bypass:%s',$this->getId(),$idx,$status,$bypass));
-
+		$presence = ($status=="ALARM") ? 1 : 0;
 		$eqLogic = self::byLogicalId($this->buildLogicalID('Z'.$idx), JEEKSENIA);
 		if ( is_object($eqLogic) ) {
-			$eqLogic->checkAndUpdateCmd('presence', ($status=="ALARM") ? 1 : 0);	// NORMAL ou ALARM ou LOST
+			$eqLogic->checkAndUpdateCmd('presence', $presence);	// NORMAL ou ALARM ou LOST
 			$eqLogic->checkAndUpdateCmd('status', ($status=="LOST") ? "LOST" : $bypass);
 		} else {
 			log::add(JEEKSENIA, 'warning', __METHOD__ .' equipment '.'Z'.$idx.'not found');
 		}
+		return $presence;
 	}
 
 	public function refreshFromKSenia() {
@@ -379,9 +381,11 @@ public static function deamon_changeAutoMode($mode) {
 		*/
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
+			$count = 0;
 			foreach( $arr as $key=>$zone ) {
-				$this->updateChildEQStatus($key,$zone->status, $zone->bypass);
+				$count += $this->updateChildEQStatus($key,$zone->status, $zone->bypass);
 			}
+			$this->checkAndUpdateCmd('presence', $presence);	// NORMAL ou ALARM ou LOST
 		}
 		return null;
 	}
