@@ -7,8 +7,8 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 ## Utilisation
 
 - activer le plugin et choisir une frequence de mise a jour , 5-6 sec est un bon choix
-- creer un equipement racine pour la centrale ( avec addr ip, port , user name, pwd pour l'acces au site web de la centrale )
-- au prochain save de l'equipement racine les equipements Zones seront crees
+- creer un equipement racine pour la centrale ( avec addr ip, port , user name, pwd pour l'acces au site web de la centrale ). Choisir un objet parent.
+- au prochain save de l'equipement racine les equipements Zones seront crees. les equipements sont crees par defaut sous le meme objet parent que la racine.
 
 
 ## Commandes

@@ -183,7 +183,7 @@ public static function deamon_changeAutoMode($mode) {
 		$type = $this->getConfiguration('type',null);
 		switch($type) {
 			case 'zone': {	// Zone Equipment
-				$this->createOrUpdateCommand( __('Présence',__FILE__), 'presence', 'info', 'binary', 1, 'PRESENCE','timePresence' );
+				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'binary', 1, 'PRESENCE',true,'timePresence' );
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'autre', 1, 'GENERIC_INFO' );
 				break;
 			}
@@ -455,7 +455,7 @@ public static function deamon_changeAutoMode($mode) {
 		}
 	} */
 
-	public function createOrUpdateCommand( $name, $logicalid, $type, $subtype, $is_visible, $generic_type, $template=null, $targetcmdid=null) {
+	public function createOrUpdateCommand( $name, $logicalid, $type, $subtype, $is_visible, $generic_type, $is_inverted=false, $template=null, $targetcmdid=null) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' name:' . $name);
 		$cmd = $this->getCmd(null, $logicalid);
 		if (!is_object($cmd)) {
@@ -468,6 +468,8 @@ public static function deamon_changeAutoMode($mode) {
 			$cmd->setIsVisible($is_visible);
 			//$cmd->setDisplay('generic_type', $generic_type);
 			$cmd->setGeneric_type($generic_type);
+			$cmd->setDisplay('invertBinary',$is_inverted ? 1 : 0);
+			
 			if (!is_null($targetcmdid)) {
 				$cmd->setValue( (int) $targetcmdid );
 			} 
