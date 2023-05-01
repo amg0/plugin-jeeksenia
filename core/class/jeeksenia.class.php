@@ -164,12 +164,6 @@ public static function deamon_changeAutoMode($mode) {
 	// Fonction exécutée automatiquement après la mise à jour de l'équipement
 	public function postUpdate() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
-
-		// do this only for update such that the initial parameters are set ( ipaddr etc ) and comm can happen with KSENIA
-		$type = $this->getConfiguration('type',null);
-		if (is_null($type)) {
-			$this->updateConfigurationFromKsenia();
-		}
 	}
 
 	// Fonction exécutée automatiquement avant la sauvegarde (création ou mise à jour) de l'équipement
@@ -188,10 +182,12 @@ public static function deamon_changeAutoMode($mode) {
 				break;
 			}
 			default: {  // Root Equipment
+						// do this only for update such that the initial parameters are set ( ipaddr etc ) and comm can happen with KSENIA
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
 				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'numeric', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
+				$this->updateConfigurationFromKsenia();
 				break;
 			}
 		}
@@ -308,6 +304,8 @@ public static function deamon_changeAutoMode($mode) {
 	}
 	
 	private function KSeniaHttpCall($action) {
+        $result = array();
+		$result['ok']=false;
 		$url = $this->getUrl() . $action;
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s url:%s',$this->getId(),$url ));
 		$ch = curl_init();
@@ -322,7 +320,6 @@ public static function deamon_changeAutoMode($mode) {
 			CURLOPT_TIMEOUT => 30
 		]);		
 
-        $result = array();
 		$result['response'] = curl_exec($ch);							// output string
 		$result['http_code'] = curl_getinfo($ch,CURLINFO_HTTP_CODE);	// HTTP Return code
 		$result['ok'] =  ($result['response'] !== false) && ($result['http_code'] == 200) ;
