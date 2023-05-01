@@ -189,7 +189,7 @@ public static function deamon_changeAutoMode($mode) {
 			}
 			default: {  // Root Equipment
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
-				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'numeric', 1, 'PRESENCE',true );
+				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'numeric', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				break;
