@@ -184,6 +184,7 @@ public static function deamon_changeAutoMode($mode) {
 		switch($type) {
 			case 'zone': {
 				$this->createOrUpdateCommand( __('Présence',__FILE__), 'presence', 'info', 'binary', 1, 'PRESENCE','timePresence' );
+				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'autre', 1, 'GENERIC_INFO' );
 				break;
 			}
 			default: {  // Root Equipment
@@ -296,9 +297,7 @@ public static function deamon_changeAutoMode($mode) {
 		return isset($icon) ? 'plugins/jeeksenia/desktop/img/'.$icon : parent::getImage();
 	}
 
-
-	// callback push from IPX
-	// http://192.168.0.9/core/api/jeeApi.php?apikey=xxxx&type=event&plugin=jeeksenia&id=3912&mac=$M&I=$I&O=$O&A=$A
+	// callback not used
 	public function event() 
 	{
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' $_GET:'.json_encode($_GET));
@@ -355,14 +354,88 @@ public static function deamon_changeAutoMode($mode) {
 	}
 
 	private function updateChildEQStatus($idx,$status,$bypass) {
-		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s status:%s bypass:%s',$this->getId(),$status,$bypass));
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s idx:%s status:%s bypass:%s',$this->getId(),$idx,$status,$bypass));
+		$root = $this->getId();
+		$eqLogic = self::byLogicalId(buildLogicalID('Z'.$idx), JEEKSENIA);
+		if ( is_object($eqLogic) ) {
+			$eqLogic->checkAndUpdateCmd('presence', ($status=="NORMAL") ? 0 : 1);
+			$eqLogic->checkAndUpdateCmd('status', ($status=="LOST") ? "LOST" : $bypass);
+		} else {
+			log::add(JEEKSENIA, 'warning', __METHOD__ .' equipment '.'Z'.$idx.'not found');
+		}
 	}
 
 	public function refreshFromKSenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesStatus16IP.xml");
 		/*
-<zonesStatus>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>LOST</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone> </zonesStatus>
+		<?xml version="1.0" encoding="UTF-8"?>
+		<zonesStatus>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>LOST</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+			<zone>
+				<status>NORMAL</status>
+				<bypass>UN_BYPASS</bypass>
+			</zone>
+		</zonesStatus>
 		*/
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
@@ -401,7 +474,7 @@ public static function deamon_changeAutoMode($mode) {
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
 			foreach( $arr as $key=>$zone ) {
-				$this->createOrUpdateChildEQ('security','zone',"Z".$key,1,1,$zone);
+				$this->createOrUpdateChildEQ('security','zone','Z'.$key,1,1,$zone);
 			}
 		}
 
