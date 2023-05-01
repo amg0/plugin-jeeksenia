@@ -406,7 +406,8 @@ public static function deamon_changeAutoMode($mode) {
 		if (is_object($xml)) {
 			$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
 			$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
-		}
+		} else
+			return false;
 
 		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesDescription16IP.xml");
 		/*
@@ -417,7 +418,83 @@ public static function deamon_changeAutoMode($mode) {
 			foreach( $arr as $key=>$zone ) {
 				$this->createOrUpdateChildEQ('security','zone','Z'.$key,1,1,$zone);
 			}
-		}
+		} else
+			return false;
+
+		$xml = $this->xmlKSeniaHttpCall("xml/scenarios/scenariosDescription.xml");
+		/*
+		<scenariosDescription>
+			<scenario>Désarmer</scenario>
+			<scenario>Armer Total</scenario>
+			<scenario>Armer contacts barriere</scenario>
+			<scenario>Armer Intérieur</scenario>
+			<scenario>Scénario 4</scenario>
+			<scenario>Scénario 5</scenario>
+			<scenario>Scénario 6</scenario>
+			<scenario>Scénario 7</scenario>
+			<scenario>Scénario 8</scenario>
+			<scenario>Lumières allumées</scenario>
+		</scenariosDescription>
+		*/
+		if (is_object($xml)) {
+			$result = array();
+			$scenario_names = $xml->xpath("//scenario");
+			$xml = $this->xmlKSeniaHttpCall("xml/scenarios/scenariosOptions.xml");
+			$arr = $xml->xpath("//scenario");
+			foreach ($arr as $idx=>$sc_descr) {
+				if ((string)$sc_descr->abil == "TRUE") {					
+					$result['S_'.$idx]=[ 'id'=>$idx, 'name'=>$scenario_names[$idx] ];
+					$this->createOrUpdateCommand( $scenario_names[$idx], 'S_'.$idx, 'action', 'other', 1, 'GENERIC_ACTION' );
+				}
+			}
+			$this->checkAndUpdateCmd('scenarios', json_encode($result));
+		} else
+			return false;
+
+		/*
+		<scenariosOptions>
+			<scenario>
+				<abil>TRUE</abil>
+				<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+				<abil>TRUE</abil>
+				<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+				<abil>TRUE</abil>
+				<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>TRUE</abil>
+			<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>FALSE</abil>
+			<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>FALSE</abil>
+			<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>FALSE</abil>
+			<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>FALSE</abil>
+			<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>FALSE</abil>
+			<nopin>FALSE</nopin>
+			</scenario>
+			<scenario>
+			<abil>FALSE</abil>
+			<nopin>TRUE</nopin>
+			</scenario>
+		</scenariosOptions>
+		*/
 
 		return true; 
 	}

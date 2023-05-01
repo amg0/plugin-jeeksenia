@@ -161,6 +161,14 @@ sendVarToJS('eqType', $plugin->getId());
 										<input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="password">
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label"> {{PIN code}}
+										<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez le PIN code}}"></i></sup>
+									</label>
+									<div class="col-sm-6">
+										<input type="text" class="eqLogicAttr form-control inputPassword" data-l1key="configuration" data-l2key="pincode">
+									</div>
+								</div>
 							</div>
 							<div class="jeeksenia-root">
 								<legend><i class="fas fa-play"></i> {{Actions de Préparation}}</legend>
