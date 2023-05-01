@@ -354,11 +354,21 @@ public static function deamon_changeAutoMode($mode) {
 		return $xml;
 	}
 
+	private function updateChildEQStatus($idx,$status,$bypass) {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s status:%s bypass:%s',$this->getId(),$status,$bypass));
+	}
+
 	public function refreshFromKSenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesStatus16IP.xml");
+		/*
+<zonesStatus>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>LOST</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone>     <zone>         <status>NORMAL</status>         <bypass>UN_BYPASS</bypass>     </zone> </zonesStatus>
+		*/
 		if (is_object($xml)) {
-
+			$arr = $xml->xpath("//zone");
+			foreach( $arr as $key=>$zone ) {
+				$this->updateChildEQStatus($key,$zone->status, $zone->bypass);
+			}
 		}
 		return null;
 	}
