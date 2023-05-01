@@ -353,7 +353,7 @@ public static function deamon_changeAutoMode($mode) {
 		return $xml;
 	}
 
-	private function updateChildEQStatus($idx,$status,$bypass) {
+	private function updateChildEQStatus($idx,string $status,string $bypass) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s idx:%s status:%s bypass:%s',$this->getId(),$idx,$status,$bypass));
 		$root = $this->getId();
 		$eqLogic = self::byLogicalId($this->buildLogicalID('Z'.$idx), JEEKSENIA);
