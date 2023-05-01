@@ -127,8 +127,8 @@ sendVarToJS('eqType', $plugin->getId());
 								</div>
 							</div>
 
-							<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 							<div class="jeeksenia-root">
+								<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 								<div class="form-group">
 									<label class="col-sm-4 control-label">{{IP}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l adresse IP de l'équipement}}"></i></sup>
@@ -162,8 +162,8 @@ sendVarToJS('eqType', $plugin->getId());
 									</div>
 								</div>
 							</div>
-							<legend><i class="fas fa-play"></i> {{Actions de Préparation}}</legend>
 							<div class="jeeksenia-root">
+								<legend><i class="fas fa-play"></i> {{Actions de Préparation}}</legend>
 								<div class="alert alert-info col-xs-10 col-xs-offset-1">
 									<i class="fas fa-info"></i>
 									Sauver les parametres avant d'utiliser ces actions.
