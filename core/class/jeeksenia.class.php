@@ -500,6 +500,10 @@ public static function deamon_changeAutoMode($mode) {
 		return true; 
 	}
 
+	public function executeKSeniaScenario($scenario_idx) {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d scenario idx:%s',$this->getId(),$scenario_idx));
+	}
+
 	public function createOrUpdateChildEQ($category,$type,$child,$enable=0,$visible=0,$name=null) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d child:%s name:%s',$this->getId(),$chil,$name??''));
 		//$child = ;
@@ -600,10 +604,16 @@ class jeekseniaCmd extends cmd {
 		$root = $eqLogic->getRoot();
 		
 		log::add(JEEKSENIA, 'debug', __METHOD__ . sprintf(' root:%s eqlogic:%s cmd:%s',$root->getId(),$eqLogic->getId(), $cmdid));
-		switch ($cmdid) {
-			
-			default:
-			log::add(JEEKSENIA, 'info', __METHOD__ .' ignoring unknown command');
+
+		//Cmd for scenario
+		if (substr($cmdid,0,2)=='S_') {
+			$root->executeKSeniaScenario($cmdid);
+		} else {
+			// other command
+			switch ($cmdid) {
+				default:
+					log::add(JEEKSENIA, 'info', __METHOD__ .' ignoring unknown command');
+			}
 		}
 	}
 
