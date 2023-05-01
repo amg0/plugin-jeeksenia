@@ -358,7 +358,7 @@ public static function deamon_changeAutoMode($mode) {
 
 		$eqLogic = self::byLogicalId($this->buildLogicalID('Z'.$idx), JEEKSENIA);
 		if ( is_object($eqLogic) ) {
-			$eqLogic->checkAndUpdateCmd('presence', ($status=="NORMAL") ? 0 : 1);	// NORMAL ou ALARM ou LOST
+			$eqLogic->checkAndUpdateCmd('presence', ($status=="ALARM") ? 1 : 0);	// NORMAL ou ALARM ou LOST
 			$eqLogic->checkAndUpdateCmd('status', ($status=="LOST") ? "LOST" : $bypass);
 		} else {
 			log::add(JEEKSENIA, 'warning', __METHOD__ .' equipment '.'Z'.$idx.'not found');
