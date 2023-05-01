@@ -502,6 +502,9 @@ public static function deamon_changeAutoMode($mode) {
 
 	public function executeKSeniaScenario($scenario_idx) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d scenario idx:%s',$this->getId(),$scenario_idx));
+		// cmd::byEqLogicIdAndLogicalId(  $_eqLogic_id,   $_logicalId,   $_multiple = false,   $_type = null) 
+		// $value = $cmd->execCmd();
+		// eqLogic::getCmd(  $_type = null,   $_logicalId = null,   $_visible = null,   $_multiple = false) 
 	}
 
 	public function createOrUpdateChildEQ($category,$type,$child,$enable=0,$visible=0,$name=null) {
