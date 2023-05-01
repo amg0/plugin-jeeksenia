@@ -184,13 +184,13 @@ public static function deamon_changeAutoMode($mode) {
 		switch($type) {
 			case 'zone': {	// Zone Equipment
 				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'binary', 1, 'PRESENCE',true,'timePresence' );
-				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'autre', 1, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'string', 1, 'GENERIC_INFO' );
 				break;
 			}
 			default: {  // Root Equipment
 				$this->createOrUpdateCommand( 'Etat', 'status', 'info', 'binary', 1, 'ENERGY_STATE' );
-				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'autre', 1, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'autre', 1, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				break;
 			}
 		}
