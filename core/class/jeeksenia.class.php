@@ -318,7 +318,7 @@ public static function deamon_changeAutoMode($mode) {
 //				'Content-Type: application/xml',
 				'Authorization: Basic '. base64_encode($this->getConfigCredentials())
 			],
-			//CURLOPT_TIMEOUT => 30
+			CURLOPT_TIMEOUT => 30
 		]);		
 
         $result = array();
