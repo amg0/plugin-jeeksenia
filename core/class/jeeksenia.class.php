@@ -500,19 +500,25 @@ public static function deamon_changeAutoMode($mode) {
 		return true; 
 	}
 
+	// execute the scenario specified bythe logical cmdid  S_nnn
 	public function executeKSeniaScenario($cmdid) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d cmdid:%s',$this->getId(),$cmdid));
-		// cmd::byEqLogicIdAndLogicalId(  $_eqLogic_id,   $_logicalId,   $_multiple = false,   $_type = null) 
-		// $value = $cmd->execCmd();
-		// eqLogic::getCmd(  $_type = null,   $_logicalId = null,   $_visible = null,   $_multiple = false) 
-		
+
+		// remove S_ from cmd logical id		
 		$sc_id = substr( $cmdid,2 );
+		
+		// add the pincode if necessary
 		$pinstr = "&pin=" . $this->getConfiguration('pincode','');
+		
+		//make the call
 		$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
-		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf('simulated call url:%s',$url));
-		// $xml = $this->xmlKSeniaHttpCall($url);
-		// if (is_object($xml)) {
-		// }
+		$xml = $this->xmlKSeniaHttpCall($url);
+		if (!is_object($xml)) {
+			log::add(JEEKSENIA, 'error', __METHOD__ .sprintf('scenario call failed. url:%s',$url));
+		}
+		return $xml;
+		//xml/cmd/cmdOk.xml?cmd=setMacro&pin=150618&macroId=0&redirectPage=/xml/cmd/cmdError.xml&_=1683054109451
+		//xml/cmd/cmdOk.xml?cmd=setMacro&pin=150618&macroId=0&redirectPage=/xml/cmd/cmdError.xml
 	}
 
 	public function createOrUpdateChildEQ($category,$type,$child,$enable=0,$visible=0,$name=null) {
