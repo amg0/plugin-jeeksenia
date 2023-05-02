@@ -507,29 +507,27 @@ public static function deamon_changeAutoMode($mode) {
 		// get scenario description map
 		$cmd_scenario = $this->getCmd('info', 'scenarios');
 		if (is_object($cmd_scenario)) {
-			// find scenario description map
-			$str = $cmd_scenario->execCmd();
-			//log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' str=%s',$str));
-			// decode it as an associative array
-			$map = json_decode( $str ,true );
-			//log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' map=%s',json_encode($map)));
-			$descr = $map[$cmdid];
-
-			// remove S_ from cmd logical id		
-			$sc_id = substr( $cmdid,2 );
-			
-			// add the pincode if necessary
-			$pinstr = ($descr['nopin']=="FALSE") 
-						? "&pin=" . $this->getConfiguration('pincode','') 
-						: '';
-			
-			//make the call
-			$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
-			$xml = $this->xmlKSeniaHttpCall($url);
-			if (is_object($xml)) {
-				return $xml;
+			// find scenario description map decode it as an associative array
+			$map = json_decode( $cmd_scenario->execCmd() ,true );
+			if (!is_null($map)) {
+				// remove S_ from cmd logical id		
+				$sc_id = substr( $cmdid,2 );
+				
+				// add the pincode if necessary
+				$pinstr = ($map[$cmdid]['nopin']=="FALSE") 
+							? "&pin=" . $this->getConfiguration('pincode','') 
+							: '';
+				
+				//make the call
+				$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
+				$xml = $this->xmlKSeniaHttpCall($url);
+				if (is_object($xml)) {
+					return $xml;
+				}
+				log::add(JEEKSENIA, 'error', __METHOD__ .sprintf('scenario call failed. url:%s',$url));
+			} else {
+				log::add(JEEKSENIA, 'warning', __METHOD__ .sprintf("error decoding json for command 'scenario' from EqLogic %s",$this->getId()));
 			}
-			log::add(JEEKSENIA, 'error', __METHOD__ .sprintf('scenario call failed. url:%s',$url));
 		} else {
 			log::add(JEEKSENIA, 'warning', __METHOD__ .sprintf("missing command 'scenario' from EqLogic %s",$this->getId()));
 		}
