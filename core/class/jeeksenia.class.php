@@ -508,7 +508,7 @@ public static function deamon_changeAutoMode($mode) {
 		
 		$sc_id = substr( $cmdid,2 );
 		$pinstr = "&pin=" . $this->getConfiguration('pincode','');
-		$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "\&macroId=" . $sc_id . "\&redirectPage=/xml/cmd/cmdError.xml";
+		$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf('simulated call url:%s',$url));
 		// $xml = $this->xmlKSeniaHttpCall($url);
 		// if (is_object($xml)) {
