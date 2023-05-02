@@ -444,7 +444,7 @@ public static function deamon_changeAutoMode($mode) {
 			$arr = $xml->xpath("//scenario");
 			foreach ($arr as $idx=>$sc_descr) {
 				if ((string)$sc_descr->abil == "TRUE") {					
-					$result['S_'.$idx]=[ 'id'=>$idx, 'name'=>(string)$scenario_names[$idx] ];
+					$result['S_'.$idx]=[ 'id'=>$idx, 'name'=>(string)$scenario_names[$idx] ,'nopin'=>(string)$sc_descr->nopin];
 					$this->createOrUpdateCommand( $scenario_names[$idx], 'S_'.$idx, 'action', 'other', 1, 'GENERIC_ACTION' );
 				}
 			}
@@ -504,21 +504,32 @@ public static function deamon_changeAutoMode($mode) {
 	public function executeKSeniaScenario($cmdid) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d cmdid:%s',$this->getId(),$cmdid));
 
-		// remove S_ from cmd logical id		
-		$sc_id = substr( $cmdid,2 );
-		
-		// add the pincode if necessary
-		$pinstr = "&pin=" . $this->getConfiguration('pincode','');
-		
-		//make the call
-		$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
-		$xml = $this->xmlKSeniaHttpCall($url);
-		if (!is_object($xml)) {
+		// get scenario description map
+		$cmd_scenario = $this->getCmd('info', 'scenarios');
+		if (is_object($cmd_scenario)) {
+			// find scenario description map
+			$map = json_decode( $cmd_scenario->execCmd() );
+			$descr = $map[$cmdid];
+
+			// remove S_ from cmd logical id		
+			$sc_id = substr( $cmdid,2 );
+			
+			// add the pincode if necessary
+			$pinstr = ($descr->nopin=="FALSE") 
+						? "&pin=" . $this->getConfiguration('pincode','') 
+						: '';
+			
+			//make the call
+			$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
+			$xml = $this->xmlKSeniaHttpCall($url);
+			if (is_object($xml)) {
+				return $xml;
+			}
 			log::add(JEEKSENIA, 'error', __METHOD__ .sprintf('scenario call failed. url:%s',$url));
+		} else {
+			log::add(JEEKSENIA, 'warning', __METHOD__ .sprintf("missing command 'scenario' from EqLogic %s",$this->getId()));
 		}
-		return $xml;
-		//xml/cmd/cmdOk.xml?cmd=setMacro&pin=150618&macroId=0&redirectPage=/xml/cmd/cmdError.xml&_=1683054109451
-		//xml/cmd/cmdOk.xml?cmd=setMacro&pin=150618&macroId=0&redirectPage=/xml/cmd/cmdError.xml
+		return null;
 	}
 
 	public function createOrUpdateChildEQ($category,$type,$child,$enable=0,$visible=0,$name=null) {
