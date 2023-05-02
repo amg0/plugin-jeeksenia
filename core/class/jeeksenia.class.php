@@ -508,7 +508,10 @@ public static function deamon_changeAutoMode($mode) {
 		$cmd_scenario = $this->getCmd('info', 'scenarios');
 		if (is_object($cmd_scenario)) {
 			// find scenario description map
-			$map = json_decode( $cmd_scenario->execCmd() );
+			$str = $cmd_scenario->execCmd();
+			log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' str=%s',$str));
+			$map = json_decode( $str );
+			log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' map=%s',json_encode($map)));
 			$descr = $map[$cmdid];
 
 			// remove S_ from cmd logical id		
