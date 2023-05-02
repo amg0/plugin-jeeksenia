@@ -22,7 +22,7 @@ KSenia Root equipment
 - **Product Version** : return the KSenia product version : High.Low.Build
 - **per each scenario** : an action command is created for every single scenario programmed in the KSenia. the command's name is the scenario's name. triggering the action, will call the scenario in KSenia, based on the PIN code entered in the root equipement configuration
 
-Encryption: le `password` et le `pincode` sont encryptéq dans la base de donnees.
+Encryption: le `password` et le `pincode` sont encryptés dans la base de donnees.
 
 KSenia Zone equipment
 - **Présence** : detection de présence ( 1 ) ou abscense (0 )
