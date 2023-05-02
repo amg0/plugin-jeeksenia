@@ -509,16 +509,17 @@ public static function deamon_changeAutoMode($mode) {
 		if (is_object($cmd_scenario)) {
 			// find scenario description map
 			$str = $cmd_scenario->execCmd();
-			log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' str=%s',$str));
-			$map = json_decode( $str );
-			log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' map=%s',json_encode($map)));
+			//log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' str=%s',$str));
+			// decode it as an associative array
+			$map = json_decode( $str ,true );
+			//log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' map=%s',json_encode($map)));
 			$descr = $map[$cmdid];
 
 			// remove S_ from cmd logical id		
 			$sc_id = substr( $cmdid,2 );
 			
 			// add the pincode if necessary
-			$pinstr = ($descr->nopin=="FALSE") 
+			$pinstr = ($descr['nopin']=="FALSE") 
 						? "&pin=" . $this->getConfiguration('pincode','') 
 						: '';
 			
