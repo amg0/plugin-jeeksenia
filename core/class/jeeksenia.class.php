@@ -35,7 +35,7 @@ class jeeksenia extends eqLogic {
 	* Permet de crypter/décrypter automatiquement des champs de configuration du plugin
 	* Exemple : "param1" & "param2" seront cryptés mais pas "param3"
 	*/
-	public static $_encryptConfigKey = array('pincode', 'password');
+public static $_encryptConfigKey = array('pincode', 'password');
 
 	/*     * ***********************Methode static*************************** */
 /*     * ***********************Methode static*************************** */

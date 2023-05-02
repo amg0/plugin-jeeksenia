@@ -7,6 +7,7 @@
 ## 01/06/2023
 
 - pour les Scenarios de la centrale  : une commande action sur l'equipement root par scenario configuré dans l alarme. declencher cette action appelle le scenario sur la centrale KSenia.
+- Encryption: le `password` et le `pincode` sont encryptéq dans la base de donnees.
 
 ## 01/05/2023
 
