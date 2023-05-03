@@ -187,7 +187,8 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Présence', 'presence', 'info', 'numeric', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
+				//$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
+				$this->setConfiguration('scenarios',array());
 				$this->updateConfigurationFromKsenia();
 				break;
 			}
@@ -416,7 +417,8 @@ public static function deamon_changeAutoMode($mode) {
 					$this->createOrUpdateCommand( $scenario_names[$idx], 'S_'.$idx, 'action', 'other', 1, 'GENERIC_ACTION' );
 				}
 			}
-			$this->checkAndUpdateCmd('scenarios', json_encode($result));
+			//$this->checkAndUpdateCmd('scenarios', json_encode($result));
+			$this->setConfiguration('scenarios',$result);
 		} else
 			return false;
 
@@ -435,33 +437,27 @@ public static function deamon_changeAutoMode($mode) {
 	// execute the scenario specified bythe logical cmdid  S_nnn
 	public function executeKSeniaScenario($cmdid) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' for root:%d cmdid:%s',$this->getId(),$cmdid));
-
-		// get scenario description map
-		$cmd_scenario = $this->getCmd('info', 'scenarios');
-		if (is_object($cmd_scenario)) {
-			// find scenario description map decode it as an associative array
-			$map = json_decode( $cmd_scenario->execCmd() ,true );
-			if (!is_null($map)) {
-				// remove S_ from cmd logical id		
-				$sc_id = substr( $cmdid,2 );
-				
-				// add the pincode if necessary
-				$pinstr = ($map[$cmdid]['nopin']=="FALSE") 
-							? "&pin=" . $this->getConfiguration('pincode','') 
-							: '';
-				
-				//make the call
-				$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
-				$xml = $this->xmlKSeniaHttpCall($url);
-				if (is_object($xml)) {
-					return $xml;
-				}
-				log::add(JEEKSENIA, 'error', __METHOD__ .sprintf('scenario call failed. url:%s',$url));
-			} else {
-				log::add(JEEKSENIA, 'warning', __METHOD__ .sprintf("error decoding json for command 'scenario' from EqLogic %s",$this->getId()));
+		// find scenario description map decode it as an associative array
+		//$map = json_decode( $cmd_scenario->execCmd() ,true );
+		$map = $this->getConfiguration('scenarios',array());
+		if (!is_null($map)) {
+			// remove S_ from cmd logical id		
+			$sc_id = substr( $cmdid,2 );
+			
+			// add the pincode if necessary
+			$pinstr = ($map[$cmdid]['nopin']=="FALSE") 
+						? "&pin=" . $this->getConfiguration('pincode','') 
+						: '';
+			
+			//make the call
+			$url = "xml/cmd/cmdOk.xml?cmd=setMacro" . $pinstr . "&macroId=" . $sc_id . "&redirectPage=/xml/cmd/cmdError.xml";
+			$xml = $this->xmlKSeniaHttpCall($url);
+			if (is_object($xml)) {
+				return $xml;
 			}
+			log::add(JEEKSENIA, 'error', __METHOD__ .sprintf('scenario call failed. url:%s',$url));
 		} else {
-			log::add(JEEKSENIA, 'warning', __METHOD__ .sprintf("missing command 'scenario' from EqLogic %s",$this->getId()));
+			log::add(JEEKSENIA, 'warning', __METHOD__ .sprintf("error decoding json for command 'scenario' from EqLogic %s",$this->getId()));
 		}
 		return null;
 	}
