@@ -376,6 +376,13 @@ public static function deamon_changeAutoMode($mode) {
 			}
 			$this->checkAndUpdateCmd('presence', $count);	// NORMAL ou ALARM ou LOST
 		}
+		$xml = $this->xmlKSeniaHttpCall("xml/partitions/partitionsStatus16IP.xml");
+		if (is_object($xml)) {
+			$arr = $xml->xpath("//partition");
+			foreach( $arr as $key=>$partition ) {
+				$eqLogic->checkAndUpdateCmd('P_'.$key, (string)$partition);
+			}
+		}
 		return null;
 	}
 

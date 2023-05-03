@@ -20,6 +20,7 @@ KSenia Root equipment
 - **Présence** : compte le nombre de zone qui detecte une presence ( 0 rien,  1 ou plus = le nombre de detecteur(s) avec présence confirmée)
 - **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares 16IP
 - **Product Version** : return the KSenia product version : High.Low.Build
+- **per each partition** : an info command for each partition that will contain the partition status
 - **per each scenario** : an action command is created for every single scenario programmed in the KSenia. the command's name is the scenario's name. triggering the action, will call the scenario in KSenia, based on the PIN code entered in the root equipement configuration
 
 Encryption: le `password` et le `pincode` sont encryptés dans la base de donnees.
