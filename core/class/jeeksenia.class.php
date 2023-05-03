@@ -380,7 +380,7 @@ public static function deamon_changeAutoMode($mode) {
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//partition");
 			foreach( $arr as $key=>$partition ) {
-				$eqLogic->checkAndUpdateCmd('P_'.$key, (string)$partition);
+				$this->checkAndUpdateCmd('P_'.$key, (string)$partition);
 			}
 		}
 		return null;
