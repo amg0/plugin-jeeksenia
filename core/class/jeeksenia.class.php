@@ -23,10 +23,13 @@ class jeeksenia extends eqLogic {
 	// prefix by underscore : https://community.jeedom.com/t/mysql-error-code-42s22-1054-unknown-column-utils-in-field-list/64274/6
 
 	private static $_urls = [
+		"generalInfo" => "xml/info/generalInfo.xml",
 		"zoneStatus" => "xml/zones/zonesStatus16IP.xml",
 		"zoneDescription" => "xml/zones/zonesDescription16IP.xml",
 		"partitionStatus" => "xml/partitions/partitionsStatus16IP.xml",
-		"partitionDescription" => "xml/partitions/partitionsDescription16IP.xml"
+		"partitionDescription" => "xml/partitions/partitionsDescription16IP.xml",
+		"scenarioDescription" => "xml/scenarios/scenariosDescription.xml",
+		"scenarioOptions" => "xml/scenarios/scenariosOptions.xml"
 	];
 
 	/*     * *************************Attributs****************************** */
@@ -396,7 +399,7 @@ public static function deamon_changeAutoMode($mode) {
 
 	public function updateConfigurationFromKsenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
-		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
+		$xml = $this->xmlKSeniaHttpCall( self::$_urls["generalInfo"] );
 		if (is_object($xml)) {
 			$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
 			$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
@@ -412,11 +415,11 @@ public static function deamon_changeAutoMode($mode) {
 		} else
 			return false;
 
-		$xml = $this->xmlKSeniaHttpCall("xml/scenarios/scenariosDescription.xml");
+		$xml = $this->xmlKSeniaHttpCall( self::$_urls["scenarioDescription"]);
 		if (is_object($xml)) {
 			$result = array();
 			$scenario_names = $xml->xpath("//scenario");
-			$xml = $this->xmlKSeniaHttpCall("xml/scenarios/scenariosOptions.xml");
+			$xml = $this->xmlKSeniaHttpCall( self::$_urls["scenarioOptions"] );
 			$arr = $xml->xpath("//scenario");
 			foreach ($arr as $idx=>$sc_descr) {
 				if ((string)$sc_descr->abil == "TRUE") {					
