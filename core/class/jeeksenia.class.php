@@ -169,11 +169,6 @@ public static function deamon_changeAutoMode($mode) {
 	// Fonction exécutée automatiquement avant la sauvegarde (création ou mise à jour) de l'équipement
 	public function preSave() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
-	}
-
-	// Fonction exécutée automatiquement après la sauvegarde (création ou mise à jour) de l'équipement
-	public function postSave() {
-		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$type = $this->getConfiguration('type',null);
 		switch($type) {
 			case 'zone': {	// Zone Equipment
@@ -193,6 +188,11 @@ public static function deamon_changeAutoMode($mode) {
 				break;
 			}
 		}
+	}
+
+	// Fonction exécutée automatiquement après la sauvegarde (création ou mise à jour) de l'équipement
+	public function postSave() {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 	}
 
 	// Fonction exécutée automatiquement avant la suppression de l'équipement
