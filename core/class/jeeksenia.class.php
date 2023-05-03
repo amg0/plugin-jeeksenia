@@ -23,7 +23,10 @@ class jeeksenia extends eqLogic {
 	// prefix by underscore : https://community.jeedom.com/t/mysql-error-code-42s22-1054-unknown-column-utils-in-field-list/64274/6
 
 	private static $_urls = [
-		"zoneStatus" => "xml/zones/zonesStatus16IP.xml"
+		"zoneStatus" => "xml/zones/zonesStatus16IP.xml",
+		"zoneDescription" => "xml/zones/zonesDescription16IP.xml",
+		"partitionStatus" => "xml/partitions/partitionsStatus16IP.xml",
+		"partitionDescription" => "xml/partitions/partitionsDescription16IP.xml"
 	];
 
 	/*     * *************************Attributs****************************** */
@@ -381,7 +384,7 @@ public static function deamon_changeAutoMode($mode) {
 			}
 			$this->checkAndUpdateCmd('presence', $count);	// NORMAL ou ALARM ou LOST
 		}
-		$xml = $this->xmlKSeniaHttpCall("xml/partitions/partitionsStatus16IP.xml");
+		$xml = $this->xmlKSeniaHttpCall( self::$_urls['partitionStatus'] );
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//partition");
 			foreach( $arr as $key=>$partition ) {
@@ -400,7 +403,7 @@ public static function deamon_changeAutoMode($mode) {
 		} else
 			return false;
 
-		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesDescription16IP.xml");
+		$xml = $this->xmlKSeniaHttpCall( self::$_urls["zoneDescription"] );
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
 			foreach( $arr as $key=>$zone ) {
@@ -426,7 +429,7 @@ public static function deamon_changeAutoMode($mode) {
 		} else
 			return false;
 
-		$xml = $this->xmlKSeniaHttpCall("xml/partitions/partitionsDescription16IP.xml");
+		$xml = $this->xmlKSeniaHttpCall( self::$_urls["partitionDescription"] );
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//partition");
 			foreach( $arr as $key=>$partition ) {
