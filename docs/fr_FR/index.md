@@ -25,7 +25,7 @@ KSenia Root equipment
 Encryption: le `password` et le `pincode` sont encryptés dans la base de donnees.
 
 KSenia Zone equipment
-- **Présence** : detection de présence ( 1 ) ou abscense (0 )
+- **Présence** : detection de présence ( 1 ) ou absence (0 )
 - **Etat** : Etat du capteur de la zone ( UN_BYPASS en mode normal , LOST si perdu )
 
 ## Change Log
