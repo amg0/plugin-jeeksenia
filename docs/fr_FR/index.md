@@ -10,8 +10,8 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 - creer un equipement racine pour la centrale ( avec addr ip, port , user name, pwd pour l'acces au site web de la centrale et PIN code pour les scenarios ). 
 - Choisir un objet parent pour l'equipement racine.
 - Au prochain save de l'equipement racine les equipements Zones seront crees. les equipements sont crees par defaut sous le meme objet parent que la racine.
-- des commandes action sont crees sur l'equipement racine pour chacun des scenarios commandables sur la KSenia
-
+- Des commandes action sont crees sur l'equipement racine pour chacun des scenarios commandables sur la KSenia
+- Des commandes info sont crees sur l'equipement racine pour chacune des partitions de l'alarme et contiendront le status d'armement
 
 ## Commandes
 

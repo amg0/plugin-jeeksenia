@@ -5,10 +5,10 @@
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
 ## 03/06/2023
-- **per each partition** : an info command on the root for each partition which will contain the partition status
+- **pour chaque partition** : une commande info est creer sur l'equipement racine pour chacune des partitions de l'alarme et contient le status d'armement.
 
 ## 01/06/2023
-- pour les Scenarios de la centrale  : une commande action sur l'equipement root par scenario configuré dans l alarme. declencher cette action appelle le scenario sur la centrale KSenia.
+- **pour chaque scenario** : une commande action sur l'equipement racine par scenario configuré dans l alarme. Declencher cette action appelle le scenario sur la centrale KSenia.
 - Encryption: le `password` et le `pincode` sont encryptés dans la base de donnees.
 
 ## 01/05/2023
