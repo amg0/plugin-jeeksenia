@@ -148,7 +148,6 @@ public static function deamon_changeAutoMode($mode) {
 	// Fonction exécutée automatiquement avant la création de l'équipement
 	public function preInsert() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
-		$this->setEqType_name('jeeksenia');
 	}
 
 	// Fonction exécutée automatiquement après la création de l'équipement
@@ -169,6 +168,7 @@ public static function deamon_changeAutoMode($mode) {
 	// Fonction exécutée automatiquement avant la sauvegarde (création ou mise à jour) de l'équipement
 	public function preSave() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		$this->setEqType_name('jeeksenia');
 		$type = $this->getConfiguration('type',null);
 		switch($type) {
 			case 'zone': {	// Zone Equipment
