@@ -383,7 +383,7 @@ public static function deamon_changeAutoMode($mode) {
 			foreach( $arr as $key=>$zone ) {
 				$count += $this->updateChildEQStatus($key,$zone->status, $zone->bypass);
 			}
-			$this->checkAndUpdateCmd('presence', $presence);	// NORMAL ou ALARM ou LOST
+			$this->checkAndUpdateCmd('presence', $count);	// NORMAL ou ALARM ou LOST
 		}
 		return null;
 	}
