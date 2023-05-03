@@ -170,19 +170,6 @@ sendVarToJS('eqType', $plugin->getId());
 									</div>
 								</div>
 							</div>
-							<div class="jeeksenia-root">
-								<legend><i class="fas fa-play"></i> {{Actions de Préparation}}</legend>
-								<div class="alert alert-info col-xs-10 col-xs-offset-1">
-									<i class="fas fa-info"></i>
-									Sauver les parametres avant d'utiliser ces actions.
-								</div>
-								<div class="form-group">
-									<label class="col-sm-4 control-label">Actions</label>
-									<div class="col-sm-6 btn-group" role="group" aria-label="...">
-										<button id="jeeksenia-testurl" type="button" class="btn btn-default"><i id="jeeksenia-testurlok" class="fas fa-check"></i> Test Access</button>
-									</div>
-								</div>
-							</div>
 						</div>
 
 						<!-- Partie droite de l'onglet "Équipement" -->
@@ -193,20 +180,6 @@ sendVarToJS('eqType', $plugin->getId());
 								<label class="col-sm-4 control-label">{{Description}}</label>
 								<div class="col-sm-6">
 									<textarea class="form-control eqLogicAttr autogrow" data-l1key="comment"></textarea>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-6 jeeksenia-root">
-							<legend><i class="fas fa-cogs"></i> {{Configuration}}</legend>
-							<div class="alert alert-warning col-xs-10 col-xs-offset-1">
-								<i class="fas fa-exclamation-triangle"></i>
-								Décocher une ou plusieurs cases aura pour conséquence la suppression du ou des équipements correspondants.
-							</div>
-							<div class="form-group">
-							<div class="col-sm-1"></div>
-								<div class="col-sm-9">
-									<span>todo</span>
 								</div>
 							</div>
 						</div>
