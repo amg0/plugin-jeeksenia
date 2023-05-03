@@ -247,7 +247,7 @@ public static function deamon_changeAutoMode($mode) {
 	* Exemple avec la variable "param3"
 	public static function postConfig_param3($value) {
 		// no return value
-	}
+	}≠±
 	*/
 
 	// Logical ID for child equipment
@@ -368,15 +368,6 @@ public static function deamon_changeAutoMode($mode) {
 	public function refreshFromKSenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesStatus16IP.xml");
-		/*
-		<?xml version="1.0" encoding="UTF-8"?>
-		<zonesStatus>
-			<zone>
-				<status>NORMAL</status>
-				<bypass>UN_BYPASS</bypass>
-			</zone>
-		</zonesStatus>
-		*/
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
 			$count = 0;
@@ -391,19 +382,6 @@ public static function deamon_changeAutoMode($mode) {
 	public function updateConfigurationFromKsenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
 		$xml = $this->xmlKSeniaHttpCall("xml/info/generalInfo.xml");
-		/*
-		<generalInfo>
-			<productName>KSENIA lares 16IP</productName>
-			<productHighRevision>1</productHighRevision>
-			<productLowRevision>6</productLowRevision>
-			<productBuildRevision>1265</productBuildRevision>
-			<webServerFW>1.0.0.15</webServerFW>
-			<webServerHTML>1.1.30</webServerHTML>
-			<info1>Sécurité Vol Feu</info1>
-			<info2>04 38 24 02 15</info2>
-			<timestamp>1682886566</timestamp>
-		</generalInfo>
-		*/
 		if (is_object($xml)) {
 			$this->checkAndUpdateCmd('productname', (string) $xml->productName[0]);
 			$this->checkAndUpdateCmd('productversion',  sprintf('%s.%s.%s',(string)$xml->productHighRevision[0],(string)$xml->productLowRevision[0],(string)$xml->productBuildRevision[0]));
@@ -411,9 +389,6 @@ public static function deamon_changeAutoMode($mode) {
 			return false;
 
 		$xml = $this->xmlKSeniaHttpCall("xml/zones/zonesDescription16IP.xml");
-		/*
-		<?xml version="1.0" encoding="ISO-8859-1"?> <zonesDescription>     <zone>IR hall d&#39;entr?e</zone>     <zone>IR sejour</zone>     <zone>IR bureau</zone>     <zone>IR chambre s.sol</zone>     <zone>IR buanderie</zone>     <zone>VX Cot? bureau</zone>     <zone>IR Salle de Gym</zone>     <zone>IRR chambre parent</zone>     <zone>IRR chambre ?tage</zone>     <zone>CTR bureau gauche</zone>     <zone>CTR bureau droite</zone>     <zone>CTR SDB parent velux droit</zone>     <zone>CTR SDB ?tage</zone>     <zone>VX Entr?e devant</zone>     <zone>VX Entr?e arri?re</zone>     <zone>CTR SDB parent velux gauche</zone> </zonesDescription>
-		*/
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
 			foreach( $arr as $key=>$zone ) {
@@ -423,20 +398,6 @@ public static function deamon_changeAutoMode($mode) {
 			return false;
 
 		$xml = $this->xmlKSeniaHttpCall("xml/scenarios/scenariosDescription.xml");
-		/*
-		<scenariosDescription>
-			<scenario>Désarmer</scenario>
-			<scenario>Armer Total</scenario>
-			<scenario>Armer contacts barriere</scenario>
-			<scenario>Armer Intérieur</scenario>
-			<scenario>Scénario 4</scenario>
-			<scenario>Scénario 5</scenario>
-			<scenario>Scénario 6</scenario>
-			<scenario>Scénario 7</scenario>
-			<scenario>Scénario 8</scenario>
-			<scenario>Lumières allumées</scenario>
-		</scenariosDescription>
-		*/
 		if (is_object($xml)) {
 			$result = array();
 			$scenario_names = $xml->xpath("//scenario");
@@ -452,51 +413,15 @@ public static function deamon_changeAutoMode($mode) {
 		} else
 			return false;
 
-		/*
-		<scenariosOptions>
-			<scenario>
-				<abil>TRUE</abil>
-				<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-				<abil>TRUE</abil>
-				<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-				<abil>TRUE</abil>
-				<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>TRUE</abil>
-			<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>FALSE</abil>
-			<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>FALSE</abil>
-			<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>FALSE</abil>
-			<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>FALSE</abil>
-			<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>FALSE</abil>
-			<nopin>FALSE</nopin>
-			</scenario>
-			<scenario>
-			<abil>FALSE</abil>
-			<nopin>TRUE</nopin>
-			</scenario>
-		</scenariosOptions>
-		*/
-
+		$xml = $this->xmlKSeniaHttpCall("xml/partitions/partitionsDescription16IP.xml");
+		if (is_object($xml)) {
+			$arr = $xml->xpath("//partition");
+			foreach( $arr as $key=>$partition ) {
+				if (strlen($partition)>0) {
+					$this->createOrUpdateCommand( $partition, 'P_'.$key, 'info', 'string', 1, 'GENERIC_INFO' );
+				}
+			}
+		}
 		return true; 
 	}
 
