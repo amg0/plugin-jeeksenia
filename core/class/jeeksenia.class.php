@@ -572,6 +572,7 @@ class jeekseniaCmd extends cmd {
 		//Cmd for scenario
 		if (substr($cmdid,0,2)=='S_') {
 			$root->executeKSeniaScenario($cmdid);
+			$root->refreshFromKSenia();		// immediate refresh
 		} else {
 			// other command
 			switch ($cmdid) {
