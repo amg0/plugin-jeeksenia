@@ -22,6 +22,7 @@ const JEEKSENIA = 'jeeksenia';     // plugin logical name
 class jeeksenia extends eqLogic {
 	// prefix by underscore : https://community.jeedom.com/t/mysql-error-code-42s22-1054-unknown-column-utils-in-field-list/64274/6
 
+	// for some other KSENIA models, these urls are likely to have to change ( 32, 48 instead of 16 )
 	private static $_urls = [
 		"generalInfo" => "xml/info/generalInfo.xml",
 		"zoneStatus" => "xml/zones/zonesStatus16IP.xml",
