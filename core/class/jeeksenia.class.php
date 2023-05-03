@@ -372,7 +372,7 @@ public static function deamon_changeAutoMode($mode) {
 
 	public function refreshFromKSenia() {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
-		$xml = $this->xmlKSeniaHttpCall( self::$_urls->zoneStatus );
+		$xml = $this->xmlKSeniaHttpCall( "xml/zones/zonesStatus16IP.xml" );
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
 			$count = 0;
