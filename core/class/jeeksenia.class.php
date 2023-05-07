@@ -200,7 +200,8 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Events', 'events', 'action', 'other', 1, 'GENERIC_ACTION' );
+				$this->createOrUpdateCommand( 'Events', 'events', 'info', 'string', 0, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION' );
 				//$this->setConfiguration('scenarios',array());
 				$this->updateConfigurationFromKsenia();
 				break;
@@ -384,8 +385,12 @@ public static function deamon_changeAutoMode($mode) {
 		$xml = $this->xmlKSeniaHttpCall( self::$_urls['events'] );
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//log");
-			log::add(JEEKSENIA, 'debug', __METHOD__ .' arr:' . json_encode($arr));
+			$json = json_encode($arr);
+			log::add(JEEKSENIA, 'debug', __METHOD__ .' arr:' . $json);
+			$this->checkAndUpdateCmd('events', $json);	
+			return true;
 		}
+		return false;
 	}
 
 	public function refreshFromKSenia() {
@@ -597,7 +602,7 @@ class jeekseniaCmd extends cmd {
 		} else {
 			// other command
 			switch ($cmdid) {
-				case 'events':
+				case 'getevents':
 					$root->getEventsFromKSenia();
 					break;
 
