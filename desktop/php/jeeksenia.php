@@ -205,7 +205,7 @@ sendVarToJS('eqType', $plugin->getId());
 						<div class="col-lg-6">
 							<legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
 							<div class="form-group">
-								<span>to do add events here</span>
+								<span id="jeeksenia-events">to do add events here</span>
 							</div>
 						</div>
 
