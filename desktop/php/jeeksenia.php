@@ -8,7 +8,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 $mapEqToCommands = array();
 
 $cmds = [
-	'getevents'=> 'action'
+	'events'=> 'info'
 ];
 
 foreach ($eqLogics as $eqLogic) {

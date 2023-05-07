@@ -42,7 +42,7 @@ function printEqLogic(eqLogic) {
 
     // get events
     // retrieve ID of configpush command
-    idgetevents = mapEqToCommands[eqLogic.id].getevents;
+    idgetevents = mapEqToCommands[eqLogic.id].events;
     
     jeedom.cmd.execute({
       id: idgetevents,
