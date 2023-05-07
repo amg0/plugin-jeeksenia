@@ -41,8 +41,6 @@ if (typeof String.prototype.format == 'undefined') {
 	};
 };
 
-$("head script").append('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.min.js"></script>');
-
 function MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) {
   var html="";
   var idcolumn = idcolumn || 'id';
@@ -141,7 +139,6 @@ function printEqLogic(eqLogic) {
         html = MyArray2Table(arr,'id',['id','data','time','event'],null,'jeeksenia-cls','jeeksenia-htmlid',false);
         //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
 				$("#jeeksenia-events").html( html );
-        $("#jeeksenia-htmlid").bootgrid();
       }
     });
   }
