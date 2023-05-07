@@ -136,7 +136,7 @@ function printEqLogic(eqLogic) {
           return v.trace;
         })
 
-        html = MyArray2Table(arr,'id',['id','date','time','event'],'Events','jeeksenia-cls','jeeksenia-htmlid',false);
+        html = MyArray2Table(arr,'id',['id','data','time','event'],'Events','jeeksenia-cls','jeeksenia-htmlid',false);
         //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
 				$("#jeeksenia-events").html( html );
       }
