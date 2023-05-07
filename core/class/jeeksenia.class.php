@@ -30,7 +30,8 @@ class jeeksenia extends eqLogic {
 		"partitionStatus" => "xml/partitions/partitionsStatus16IP.xml",
 		"partitionDescription" => "xml/partitions/partitionsDescription16IP.xml",
 		"scenarioDescription" => "xml/scenarios/scenariosDescription.xml",
-		"scenarioOptions" => "xml/scenarios/scenariosOptions.xml"
+		"scenarioOptions" => "xml/scenarios/scenariosOptions.xml",
+		"events" => "xml/log/log60.xml"
 	];
 
 	/*     * *************************Attributs****************************** */
@@ -199,6 +200,7 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Events', 'events', 'info', 'string', 0, 'GENERIC_INFO' );
 				//$this->setConfiguration('scenarios',array());
 				$this->updateConfigurationFromKsenia();
 				break;
@@ -375,6 +377,15 @@ public static function deamon_changeAutoMode($mode) {
 			log::add(JEEKSENIA, 'warning', __METHOD__ .' equipment '.'Z'.$idx.'not found');
 		}
 		return $presence;
+	}
+
+	public function getEventsFromKSenia() {
+		log::add(JEEKSENIA, 'debug', __METHOD__ .' id:' . $this->getId());
+		$xml = $this->xmlKSeniaHttpCall( self::$_urls['events'] );
+		if (is_object($xml)) {
+			$arr = $xml->xpath("//log");
+			log::add(JEEKSENIA, 'debug', __METHOD__ .' arr:' . json_encode($arr));
+		}
 	}
 
 	public function refreshFromKSenia() {
@@ -586,6 +597,10 @@ class jeekseniaCmd extends cmd {
 		} else {
 			// other command
 			switch ($cmdid) {
+				case 'events':
+					$root->getEventsFromKSenia();
+					break;
+
 				default:
 					log::add(JEEKSENIA, 'info', __METHOD__ .' ignoring unknown command');
 			}
