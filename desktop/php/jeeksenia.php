@@ -26,7 +26,6 @@ foreach ($eqLogics as $eqLogic) {
 sendVarToJS('mapEqToCommands', $mapEqToCommands);
 sendVarToJS('eqType', $plugin->getId());
 ?>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.min.js" defer></script>
 <div class="row row-overflow">
 	<!-- Page d'accueil du plugin -->
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
