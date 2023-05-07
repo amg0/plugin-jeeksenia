@@ -200,7 +200,7 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Product Name', 'productname', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Events', 'events', 'info', 'string', 0, 'GENERIC_INFO' );
+				$this->createOrUpdateCommand( 'Events', 'events', 'action', 'other', 1, 'GENERIC_ACTION' );
 				//$this->setConfiguration('scenarios',array());
 				$this->updateConfigurationFromKsenia();
 				break;
