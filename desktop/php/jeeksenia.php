@@ -184,6 +184,13 @@ sendVarToJS('eqType', $plugin->getId());
 							</div>
 						</div>
 
+						<div class="col-lg-6">
+							<legend><i class="fas fa-calendar-days"></i> {{Evenements}}</legend>
+							<div class="form-group">
+								<span>to do add events here</span>
+							</div>
+						</div>
+
 					</fieldset>
 				</form>
 			</div><!-- /.tabpanel #eqlogictab-->
