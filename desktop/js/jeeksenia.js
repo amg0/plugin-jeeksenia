@@ -39,6 +39,25 @@ function printEqLogic(eqLogic) {
   } else {
     // root equipment
     $(".jeeksenia-root").show();
+
+    // get events
+    // retrieve ID of configpush command
+    idgetevents = mapEqToCommands[eqLogic.id].getevents;
+    
+    jeedom.cmd.execute({
+      id: idgetevents,
+      async: false,
+      error: function(error) {
+        $.fn.showAlert({
+          message: 'la commande a échoué',
+          level: 'danger'
+        });
+      },
+      success:  function(newvalue) {
+        console.log(newvalue);
+        // todo
+      }
+    });
   }
 }
 

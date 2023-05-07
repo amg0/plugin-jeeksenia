@@ -5,7 +5,25 @@ if (!isConnect('admin')) {
 // Déclaration des variables obligatoires
 $plugin = plugin::byId('jeeksenia');
 $eqLogics = eqLogic::byType($plugin->getId());
+$mapEqToCommands = array();
 
+$cmds = [
+	'getevents'=> 'action'
+];
+
+foreach ($eqLogics as $eqLogic) {
+	if (is_null( $eqLogic->getConfiguration('type',null) )) {
+		$id = $eqLogic->getId();
+		$mapEqToCommands[$id] = array();
+		foreach ($cmds as $key=>$value ) {
+			$cmd = $eqLogic->getCmd($value, $key);
+			if (is_object($cmd)) {
+				$mapEqToCommands[$id][$key] = $cmd->getId();
+			}
+		}
+	}
+}	
+sendVarToJS('mapEqToCommands', $mapEqToCommands);
 sendVarToJS('eqType', $plugin->getId());
 ?>
 
@@ -185,7 +203,7 @@ sendVarToJS('eqType', $plugin->getId());
 						</div>
 
 						<div class="col-lg-6">
-							<legend><i class="fas fa-calendar-days"></i> {{Evenements}}</legend>
+							<legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
 							<div class="form-group">
 								<span>to do add events here</span>
 							</div>
