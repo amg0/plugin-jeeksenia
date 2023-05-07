@@ -132,6 +132,10 @@ function printEqLogic(eqLogic) {
       success:  function(newvalue) {
         console.log(newvalue);
         arr = json_decode(newvalue);
+        arr = $.map(arr,function(v,i){
+          return v.trace;
+        })
+
         html = MyArray2Table(arr,'id',['id','event'],'Events','jeeksenia-cls','jeeksenia-htmlid',false);
         //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
 				//$("#jeeksenia-events").html( html );
