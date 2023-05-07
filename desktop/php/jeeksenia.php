@@ -26,7 +26,7 @@ foreach ($eqLogics as $eqLogic) {
 sendVarToJS('mapEqToCommands', $mapEqToCommands);
 sendVarToJS('eqType', $plugin->getId());
 ?>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootgrid/1.3.1/jquery.bootgrid.min.js" defer></script>
 <div class="row row-overflow">
 	<!-- Page d'accueil du plugin -->
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
@@ -205,7 +205,9 @@ sendVarToJS('eqType', $plugin->getId());
 						<div class="col-lg-6">
 							<legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
 							<div class="form-group">
-								<span id="jeeksenia-events">to do add events here</span>
+								<div class="table-responsive">
+									<span id="jeeksenia-events">to do add events here</span>
+								</div>
 							</div>
 						</div>
 
