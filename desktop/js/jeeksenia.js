@@ -132,7 +132,7 @@ function printEqLogic(eqLogic) {
       success:  function(newvalue) {
         console.log(newvalue);
         arr = json_decode(newvalue);
-        //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
+        html = MyArray2Table(arr,'id',['id','event'],'Events','jeeksenia-cls','jeeksenia-htmlid',false);
         //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
 				//$("#jeeksenia-events").html( html );
       }
