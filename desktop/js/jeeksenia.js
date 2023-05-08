@@ -133,7 +133,7 @@ function printEqLogic(eqLogic) {
         });
       },
       success:  function(newvalue) {
-        console.log(newvalue);
+        //console.log(newvalue);
         jeedom.cmd.execute({
           id: idevents,
           async: false,
@@ -144,7 +144,7 @@ function printEqLogic(eqLogic) {
             });
           },
           success:  function(newvalue) {
-            console.log(newvalue);
+            //console.log(newvalue);
             arr = json_decode(newvalue);
             arr = $.map(arr,function(v,i){
               return v.trace;
