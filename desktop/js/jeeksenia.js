@@ -118,8 +118,11 @@ function printEqLogic(eqLogic) {
 
     // get events
     // retrieve ID of configpush command
-    idgetevents = mapEqToCommands[eqLogic.id].events;
-    
+    idgetevents = mapEqToCommands[eqLogic.id].getevents;
+    idevents = mapEqToCommands[eqLogic.id].events;
+
+    // first refresh events
+    // then update HTML table with it
     jeedom.cmd.execute({
       id: idgetevents,
       async: false,
@@ -131,16 +134,29 @@ function printEqLogic(eqLogic) {
       },
       success:  function(newvalue) {
         console.log(newvalue);
-        arr = json_decode(newvalue);
-        arr = $.map(arr,function(v,i){
-          return v.trace;
-        })
-
-        html = MyArray2Table(arr,'id',['id','data','time','event'],null,'jeeksenia-cls','jeeksenia-htmlid',false);
-        //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
-				$("#jeeksenia-events").html( html );
+        jeedom.cmd.execute({
+          id: idevents,
+          async: false,
+          error: function(error) {
+            $.fn.showAlert({
+              message: 'la commande a échoué',
+              level: 'danger'
+            });
+          },
+          success:  function(newvalue) {
+            console.log(newvalue);
+            arr = json_decode(newvalue);
+            arr = $.map(arr,function(v,i){
+              return v.trace;
+            })
+    
+            html = MyArray2Table(arr,'id',['id','data','time','event'],null,'jeeksenia-cls','jeeksenia-htmlid',false);
+            //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
+            $("#jeeksenia-events").html( html );
+          }
+        });    
       }
-    });
+    });    
   }
 }
 
