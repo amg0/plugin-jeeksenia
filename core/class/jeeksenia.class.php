@@ -322,7 +322,7 @@ public static function deamon_changeAutoMode($mode) {
 	private function KSeniaHttpCall($action) {
         $result = array();
 		$result['ok']=false;
-		$url = $this->getUrl() . $action;
+		$url = $this->getUrl() . $action . "&_=" . rand(0 , PHP_INT_MAX );
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s url:%s',$this->getId(),$url ));
 		$ch = curl_init();
 
