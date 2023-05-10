@@ -41,7 +41,7 @@ if (typeof String.prototype.format == 'undefined') {
 	};
 };
 
-function MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) {
+function MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive,classmap) {
   var html="";
   var idcolumn = idcolumn || 'id';
   var viscols = viscols || [idcolumn];
@@ -85,7 +85,12 @@ function MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) {
       }
       html+="<tr>"
       $.each(display_order,function(_k,k) {
-        html+="<td>"
+        if ( classmap && classmap[k] && (typeof classmap[k] === "function") )  {
+          cls = classmap[k] ( k, obj );
+        } else {
+          cls = '';
+        }
+        html+="<td class='"+cls+"'>";
         html+=(obj[k]!=undefined) ? obj[k] : '';
         html+="</td>"
       });
@@ -150,7 +155,22 @@ function printEqLogic(eqLogic) {
               return $.extend({}, v.trace, { type:v.type });
             })
     
-            html = MyArray2Table(arr,'id',['id','data','time','event'],null,'jeeksenia-cls','jeeksenia-htmlid',false);
+            html = MyArray2Table(
+                arr,'id',
+                ['id','data','time','event','generator','means'],
+                null,
+                'jeeksenia-cls',
+                'jeeksenia-htmlid',
+                false,
+                {
+                  'id':function(k,obj) { if (obj.type>2) return 'txt-danger' },
+                  'data':null,
+                  'time':null,
+                  'event':null,
+                  'generator':null,
+                  'means':null
+                }
+              );
             //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
             $("#jeeksenia-events").html( html );
           }
