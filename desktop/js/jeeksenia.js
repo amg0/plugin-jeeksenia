@@ -128,6 +128,8 @@ function printEqLogic(eqLogic) {
 
     // first refresh events
     // then update HTML table with it
+    function type2cls(k,obj) { if (parseInt(obj.type)>2) return 'text-danger' }
+
     jeedom.cmd.execute({
       id: idgetevents,
       async: false,
@@ -137,7 +139,7 @@ function printEqLogic(eqLogic) {
           level: 'danger'
         });
       },
-      success:  function(newvalue) {
+      success:  function(newvalue) {        
         //console.log(newvalue);
         jeedom.cmd.execute({
           id: idevents,
@@ -163,12 +165,12 @@ function printEqLogic(eqLogic) {
                 'jeeksenia-htmlid',
                 false,
                 {
-                  'id':function(k,obj) { if (parseInt(obj.type)>2) return 'text-danger' },
-                  'data':null,
-                  'time':null,
-                  'event':null,
-                  'generator':null,
-                  'means':null
+                  'id':type2cls,
+                  'data':type2cls,
+                  'time':type2cls,
+                  'event':type2cls,
+                  'generator':type2cls,
+                  'means':type2cls
                 }
               );
             //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
