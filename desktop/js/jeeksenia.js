@@ -147,7 +147,7 @@ function printEqLogic(eqLogic) {
             console.log(newvalue);
             arr = json_decode(newvalue);
             arr = $.map(arr,function(v,i){
-              return v.trace;
+              return $.extend({}, v.trace, { type:v.type });
             })
     
             html = MyArray2Table(arr,'id',['id','data','time','event'],null,'jeeksenia-cls','jeeksenia-htmlid',false);
