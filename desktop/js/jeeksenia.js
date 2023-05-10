@@ -160,7 +160,7 @@ function printEqLogic(eqLogic) {
             })
     
             html = MyArray2Table(
-                arr,'id',
+                arr,'data',
                 ['data','time','event','generator','means'],
                 null,
                 'jeeksenia-cls',
