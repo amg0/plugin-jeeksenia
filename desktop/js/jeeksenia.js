@@ -55,11 +55,11 @@ function MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive,class
         display_order.push(v);
       }
     });
-    $.each(keys,function(k,v) {
-      if ($.inArray(v,viscols)==-1) {
-        display_order.push(v);
-      }
-    });
+    // $.each(keys,function(k,v) {
+    //   if ($.inArray(v,viscols)==-1) {
+    //     display_order.push(v);
+    //   }
+    // });
 
     var bFirst=true;
     html+="<table id='{1}' class='table {2} table-sm table-hover table-striped {0}'>".format(cls || '', htmlid || 'altui-grid' , responsive );
@@ -154,9 +154,7 @@ function printEqLogic(eqLogic) {
             console.log(newvalue);
             arr = json_decode(newvalue);
             arr = $.map(arr,function(v,i){
-              obj = $.extend({}, v.trace, { type:v.type });
-              delete obj.id;
-              return obj;
+              return $.extend({}, v.trace, { type:v.type });
             })
     
             html = MyArray2Table(
@@ -167,6 +165,7 @@ function printEqLogic(eqLogic) {
                 'jeeksenia-htmlid',
                 false,
                 {
+                  //'id':type2cls,
                   'data':type2cls,
                   'time':type2cls,
                   'event':type2cls,
