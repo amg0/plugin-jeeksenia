@@ -154,23 +154,25 @@ function printEqLogic(eqLogic) {
             console.log(newvalue);
             arr = json_decode(newvalue);
             arr = $.map(arr,function(v,i){
-              return $.extend({}, v.trace, { type:v.type });
+              obj = $.extend({}, v.trace, { type:v.type });
+              delete obj.id;
+              return obj;
             })
     
             html = MyArray2Table(
                 arr,'id',
-                ['id','data','time','event','generator','means'],
+                ['data','time','event','generator','means'],
                 null,
                 'jeeksenia-cls',
                 'jeeksenia-htmlid',
                 false,
                 {
-                  'id':type2cls,
                   'data':type2cls,
                   'time':type2cls,
                   'event':type2cls,
                   'generator':type2cls,
-                  'means':type2cls
+                  'means':type2cls,
+                  'type':type2cls
                 }
               );
             //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
