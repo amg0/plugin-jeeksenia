@@ -163,7 +163,7 @@ function printEqLogic(eqLogic) {
                 'jeeksenia-htmlid',
                 false,
                 {
-                  'id':function(k,obj) { if (obj.type>2) return 'txt-danger' },
+                  'id':function(k,obj) { if (parseInt(obj.type)>2) return 'text-danger' },
                   'data':null,
                   'time':null,
                   'event':null,
