@@ -33,66 +33,72 @@ if (typeof String.prototype.format == 'undefined') {
 	};
 };
 
-function MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive,classmap) {
-  var html="";
-  var idcolumn = idcolumn || 'id';
-  var viscols = viscols || [idcolumn];
-  var responsive = ((bResponsive==null) || (bResponsive==true)) ? 'table-responsive-OFF' : ''
-
-  if ( (arr) && ($.isArray(arr) && (arr.length>0)) ) {
-    var display_order = [];
-    var keys= Object.keys(arr[0]);
-    $.each(viscols,function(k,v) {
-      if ($.inArray(v,keys)!=-1) {
-        display_order.push(v);
-      }
-    });
-    // $.each(keys,function(k,v) {
-    //   if ($.inArray(v,viscols)==-1) {
-    //     display_order.push(v);
-    //   }
-    // });
-
-    var bFirst=true;
-    html+="<table id='{1}' class='table {2} table-sm table-hover table-striped {0}'>".format(cls || '', htmlid || 'altui-grid' , responsive );
-    if (caption)
-      html += "<caption>{0}</caption>".format(caption)
-    $.each(arr, function(idx,obj) {
-      if (bFirst) {
-        html+="<thead>"
-        html+="<tr>"
-        $.each(display_order,function(_k,k) {
-          html+="<th style='text-transform: capitalize;' data-column-id='{0}' {1} {2}>".format(
-            k,
-            (k==idcolumn) ? "data-identifier='true'" : "",
-            "data-visible='{0}'".format( $.inArray(k,viscols)!=-1 )
-          )
-          html+=k;
-          html+="</th>"
+var Amg0Utils = (function() {
+  return {
+    MyArray2Table:  function (arr,idcolumn,viscols,caption,cls,htmlid,bResponsive,classmap) {
+      var html="";
+      var idcolumn = idcolumn || 'id';
+      var viscols = viscols || [idcolumn];
+      var responsive = ((bResponsive==null) || (bResponsive==true)) ? 'table-responsive-OFF' : ''
+    
+      if ( (arr) && ($.isArray(arr) && (arr.length>0)) ) {
+        var display_order = [];
+        var keys= Object.keys(arr[0]);
+        $.each(viscols,function(k,v) {
+          if ($.inArray(v,keys)!=-1) {
+            display_order.push(v);
+          }
         });
-        html+="</tr>"
-        html+="</thead>"
-        html+="<tbody>"
-        bFirst=false;
+        // $.each(keys,function(k,v) {
+        //   if ($.inArray(v,viscols)==-1) {
+        //     display_order.push(v);
+        //   }
+        // });
+    
+        var bFirst=true;
+        html+="<table id='{1}' class='table {2} table-sm table-hover table-striped {0}'>".format(cls || '', htmlid || 'altui-grid' , responsive );
+        if (caption)
+          html += "<caption>{0}</caption>".format(caption)
+        $.each(arr, function(idx,obj) {
+          if (bFirst) {
+            html+="<thead>"
+            html+="<tr>"
+            $.each(display_order,function(_k,k) {
+              html+="<th style='text-transform: capitalize;' data-column-id='{0}' {1} {2}>".format(
+                k,
+                (k==idcolumn) ? "data-identifier='true'" : "",
+                "data-visible='{0}'".format( $.inArray(k,viscols)!=-1 )
+              )
+              html+=k;
+              html+="</th>"
+            });
+            html+="</tr>"
+            html+="</thead>"
+            html+="<tbody>"
+            bFirst=false;
+          }
+          html+="<tr>"
+          $.each(display_order,function(_k,k) {
+            if ( classmap && classmap[k] && (typeof classmap[k] === "function") )  {
+              cls = classmap[k] ( k, obj );
+            } else {
+              cls = '';
+            }
+            html+="<td class='"+cls+"'>";
+            html+=(obj[k]!=undefined) ? obj[k] : '';
+            html+="</td>"
+          });
+          html+="</tr>"
+        });
+        html+="</tbody>"
+        html+="</table>";
       }
-      html+="<tr>"
-      $.each(display_order,function(_k,k) {
-        if ( classmap && classmap[k] && (typeof classmap[k] === "function") )  {
-          cls = classmap[k] ( k, obj );
-        } else {
-          cls = '';
-        }
-        html+="<td class='"+cls+"'>";
-        html+=(obj[k]!=undefined) ? obj[k] : '';
-        html+="</td>"
-      });
-      html+="</tr>"
-    });
-    html+="</tbody>"
-    html+="</table>";
+      else
+        html +="<div>{0}</div>".format(_T("No data to display"))
+    
+      return html;
+    }
   }
-  else
-    html +="<div>{0}</div>".format(_T("No data to display"))
+})();
 
-  return html;
-};
+

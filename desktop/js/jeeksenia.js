@@ -76,7 +76,7 @@ function printEqLogic(eqLogic) {
               return $.extend({}, v.trace, { type:v.type });
             })
     
-            html = MyArray2Table(
+            html = Amg0Utils.MyArray2Table(
                 arr,
                 'data',
                 ['data','time','event','generator','means'],
