@@ -70,13 +70,13 @@ function printEqLogic(eqLogic) {
             });
           },
           success:  function(newvalue) {
-            console.log(newvalue);
+            //console.log(newvalue);
             arr = json_decode(newvalue);
             arr = $.map(arr,function(v,i){
               return $.extend({}, v.trace, { type:v.type });
             })
     
-            html = Amg0Utils.MyArray2Table(
+            html = JeeKSenia.MyArray2Table(
                 arr,
                 'data',
                 ['data','time','event','generator','means'],
