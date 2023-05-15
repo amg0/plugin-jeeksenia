@@ -13,15 +13,24 @@
 	"maxDependancyInstallTime" : 0,
 	"changelog" : "https://amg0.github.io/plugin-jeeksenia/#language#/changelog",
 	"documentation" : "https://amg0.github.io/plugin-jeeksenia/#language#/",
-	"changelog_beta" : "https://amg0.github.io/plugin-jeeksenia/#language#/beta/changelog",
-	"documentation_beta" : "https://amg0.github.io/plugin-jeeksenia/#language#/beta/",
+	"changelog_beta" : "https://amg0.github.io/plugin-jeeksenia/#language#/changelog",
+	"documentation_beta" : "https://amg0.github.io/plugin-jeeksenia/#language#/",
 	"link" : {
 		"forum":"Lien vers le forum",
 		"video" : "Lien vers une video"
 	},
 	"language": [
-		"fr_FR",
-		"en_US"
+		"fr_FR"
 	],
-	"compatibility": ""
+	"compatibility": [
+		"miniplus",
+		"smart",
+		"rpi",
+		"docker",
+		"diy",
+		"mobile",
+		"v4",
+		"atlas",
+		"luna"
+	]
 }
