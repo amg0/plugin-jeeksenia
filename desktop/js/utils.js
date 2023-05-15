@@ -33,7 +33,7 @@ if (typeof String.prototype.format == 'undefined') {
 	};
 };
 
-var Amg0Utils = (function() {
+var JeeKSenia = (function() {
   return {
     MyArray2Table:  function (arr,idcolumn,viscols,caption,cls,htmlid,bResponsive,classmap) {
       var html="";
