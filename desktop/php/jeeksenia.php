@@ -26,7 +26,16 @@ foreach ($eqLogics as $eqLogic) {
 }	
 sendVarToJS('mapEqToCommands', $mapEqToCommands);
 sendVarToJS('eqType', $plugin->getId());
+
+// example d'appel de modale
+// $('.eqLogicAction[data-action=myModalExample]').off().on('click', function() {
+// 	$('#md_modal').dialog({
+// 	  title: "{{Configuration du plugin}}"
+// 	}).load('index.php?v=d&p=plugin&ajax=1&id=' + eqType).dialog('open')
+// })
+
 ?>
+
 <div class="row row-overflow">
 	<!-- Page d'accueil du plugin -->
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
@@ -42,6 +51,11 @@ sendVarToJS('eqType', $plugin->getId());
 				<i class="fas fa-wrench"></i>
 				<br>
 				<span>{{Configuration}}</span>
+			</div>
+			<div class="cursor eqLogicAction logoSecondary" data-action="myModalExample">
+				<i class="fas fa-bullseye"></i>
+				<br>
+				<span>{{My Modale}}</span>
 			</div>
 		</div>
 		<legend><i class="fas fa-table"></i> {{Mes équipements}}</legend>

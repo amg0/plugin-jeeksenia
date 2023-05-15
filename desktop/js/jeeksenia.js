@@ -24,10 +24,6 @@ $("#table_cmd").sortable({
   forcePlaceholderSize: true
 })
 
-// $(".jeeksenia-led").off().on("change",function(event) {
-//   console.log($(this));
-// });
-
 /* Fonction permettant l'affichage de l'équipement */
 function printEqLogic(eqLogic) {
   // TODO get the proper icon from eqlogic and set it into the IMG attribute
@@ -164,3 +160,11 @@ function addCmdToTable(_cmd) {
     }
   })
 }
+
+
+$('.eqLogicAction[data-action=myModalExample]').off().on('click', function() {
+	$('#md_modal').dialog({
+	  title: "{{Test de ma modale}}"
+	}).load('index.php?v=d&p=plugin&modal=modal.jeeksenia').dialog('open')
+});
+
