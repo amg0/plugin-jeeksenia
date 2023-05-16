@@ -22,6 +22,6 @@ if (!isConnect('admin')) {
 sendVarToJs('CmdId', init('cmdid'));
 ?>
 
-Exemple de modale
+Exemple de modale pour la commande <?=init('cmdid')?>
 
 <?php include_file('desktop', 'modal', 'js', 'jeeksenia'); ?>
