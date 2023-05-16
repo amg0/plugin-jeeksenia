@@ -201,7 +201,7 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Events', 'events', 'info', 'string', 0, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION',false,'test' );
+				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION',false,'jksenia::test' );
 //createOrUpdateCommand( $name, $logicalid, $type, $subtype, $is_visible, $generic_type, $is_inverted=false, $template=null, $targetcmdid=null) {
 
 				//$this->setConfiguration('scenarios',array());
@@ -549,8 +549,8 @@ public static function deamon_changeAutoMode($mode) {
 				$cmd->setValue( (int) $targetcmdid );
 			} 
 			if (!is_null($template)) {
-				$cmd->setTemplate('dashboard',$template );    //template pour le dashboard
-				$cmd->setTemplate('mobile',$template );    //template pour le dashboard
+				$cmd->setTemplate('dashboard',$template );    	//template pour le dashboard
+				$cmd->setTemplate('mobile',$template );    		//template pour le mobile
 			}
 			// $cmd->setUnite('');
 			// $cmd->setIsHistorized(0);
