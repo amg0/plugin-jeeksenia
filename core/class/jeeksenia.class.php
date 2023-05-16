@@ -201,7 +201,9 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Events', 'events', 'info', 'string', 0, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION' );
+				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION',false,'test' );
+//createOrUpdateCommand( $name, $logicalid, $type, $subtype, $is_visible, $generic_type, $is_inverted=false, $template=null, $targetcmdid=null) {
+
 				//$this->setConfiguration('scenarios',array());
 				$this->updateConfigurationFromKsenia();
 				break;
