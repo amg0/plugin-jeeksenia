@@ -7,7 +7,10 @@
     <script>
       $('.cmd[data-cmd_uid=#uid#]:last .action').off('click').on('click', function () {
         jeedom.cmd.execute({id: '#id#'});
-        window.open('https://fr.yahoo.com');
+        $('#md_modal').dialog({
+          title: "{{Test de ma modale}}"
+        }).load('index.php?v=d&plugin=jeeksenia&modal=modal.jeeksenia').dialog('open')
+
       })
   
       if ($('.cmd[data-cmd_uid=#uid#]').last().prev().data('subtype') != undefined && $('.cmd[data-cmd_id=#id#]').last().prev().data('subtype') != 'other'
