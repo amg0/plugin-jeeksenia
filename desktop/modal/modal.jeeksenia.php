@@ -24,4 +24,13 @@ sendVarToJs('CmdId', init('cmdid'));
 
 Exemple de modale pour la commande <?=init('cmdid')?>
 
+<div class="col-lg-12">
+    <legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
+    <div class="table-responsive">
+        <span id="jeeksenia-events">to do add events here</span>
+    </div>
+</div>
+
+
 <?php include_file('desktop', 'modal', 'js', 'jeeksenia'); ?>
+<?php include_file('desktop', 'utils', 'js', 'jeeksenia');?>
