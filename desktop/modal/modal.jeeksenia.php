@@ -19,9 +19,9 @@
 if (!isConnect('admin')) {
     throw new Exception('{{401 - Accès non autorisé}}');
 }
-log::add(JEEKSENIA, 'debug', __METHOD__ .' $_GET:'.json_encode($_GET));
-log::add(JEEKSENIA, 'debug', __METHOD__ .' $_REQUEST:'.json_encode($_REQUEST));
+sendVarToJs('CmdId', init('cmdid'));
 ?>
 
 Exemple de modale
 
+<?php include_file('desktop', 'modal', 'js', 'jeeksenia'); ?>
