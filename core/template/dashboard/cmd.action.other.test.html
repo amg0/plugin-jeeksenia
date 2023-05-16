@@ -2,12 +2,12 @@
     <div class="content-xs">
       <a class="btn btn-sm btn-default action tooltips">#name_display#</a>
       <a class="btn btn-sm btn-default action tooltips">#name_display#</a>
-      <a class="btn btn-sm btn-default action tooltips">#name_display#</a>
     </div>
     <template></template>
     <script>
       $('.cmd[data-cmd_uid=#uid#]:last .action').off('click').on('click', function () {
-        jeedom.cmd.execute({id: '#id#'})
+        jeedom.cmd.execute({id: '#id#'});
+        window.open('https://fr.yahoo.com');
       })
   
       if ($('.cmd[data-cmd_uid=#uid#]').last().prev().data('subtype') != undefined && $('.cmd[data-cmd_id=#id#]').last().prev().data('subtype') != 'other'
