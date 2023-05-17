@@ -201,7 +201,7 @@ public static function deamon_changeAutoMode($mode) {
 				$this->createOrUpdateCommand( 'Product Version', 'productversion', 'info', 'string', 1, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Scénarios', 'scenarios', 'info', 'string', 0, 'GENERIC_INFO' );
 				$this->createOrUpdateCommand( 'Events', 'events', 'info', 'string', 0, 'GENERIC_INFO' );
-				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION',false,'jeeksenia::test' );
+				$this->createOrUpdateCommand( 'Get Events', 'getevents', 'action', 'other', 0, 'GENERIC_ACTION',false,'jeeksenia::dispevents' );
 				//plugin specific template must be written plugin::templatename
 
 				//$this->setConfiguration('scenarios',array());
