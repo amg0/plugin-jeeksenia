@@ -34,15 +34,7 @@ sendVarToJs('eqLogic_id', $eqid );
 sendVarToJs('events', $events);
 ?>
 
-Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 
-<?php
-    $eqLogics = eqLogic::byType('jeeksenia');
-    foreach ($eqLogics as $eqLogic) { 
-        echo $eqLogic->getID();
-    } 
-
-    echo '<br>value: '.$value;
-?>
+Exemple de modale pour la commande <?=$cmd->getName()?> de l'equipement <?=$eqLogic->getName()?> 
 
 <div class="col-lg-12">
     <legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>

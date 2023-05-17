@@ -17,6 +17,31 @@
 /* Permet la réorganisation des commandes dans l'équipement */
 
 
-console.log('eqLogic_id =',eqLogic_id);
-console.log('events =',events);
+// console.log('eqLogic_id =',eqLogic_id);
+// console.log('events =',events);
+function type2cls(k,obj) { if (parseInt(obj.type)>2) return 'text-danger' }
 
+arr = $.map(events,function(v,i){
+    return $.extend({}, v.trace, { type:v.type });
+  })
+
+  html = JeeKSenia.MyArray2Table(
+      arr,
+      'data',
+      ['data','time','event','generator','means'],
+      null,
+      'jeeksenia-cls',
+      'jeeksenia-htmlid',
+      false,
+      {
+        //'id':type2cls,
+        'data':type2cls,
+        'time':type2cls,
+        'event':type2cls,
+        'generator':type2cls,
+        'means':type2cls,
+        'type':type2cls
+      }
+    );
+  //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
+  $("#jeeksenia-events").html( html );
