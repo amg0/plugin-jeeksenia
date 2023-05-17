@@ -18,6 +18,6 @@
 
 console.log('cmd GetEvent=',cmdid);
 console.log('eqLogic =',eqLogic_id);
-console.log('events =',events);
+console.log('events =',testvalue);
 
-alert(events);
+alert(eqLogic_id);
