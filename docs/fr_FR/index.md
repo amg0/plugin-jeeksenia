@@ -18,7 +18,7 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 
 KSenia Root equipment
 - **Etat** : 1 si la connectivité fonctionne et que l'on recoit des donnees
-- **Présence** : compte le nombre de zone qui detecte une presence ( 0 rien,  1 ou plus = le nombre de detecteur(s) avec présence confirmée)
+- **Présence** : compte le nombre de zone(s) qui detecte une presence ( 0 rien,  1 ou plus = le nombre de detecteur(s) avec présence confirmée)
 - **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares 16IP
 - **Product Version** : return the KSenia product version : High.Low.Build
 - **per each partition** : an info command for each partition that will contain the partition status
