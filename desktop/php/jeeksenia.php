@@ -26,14 +26,6 @@ foreach ($eqLogics as $eqLogic) {
 }	
 sendVarToJS('mapEqToCommands', $mapEqToCommands);
 sendVarToJS('eqType', $plugin->getId());
-
-// example d'appel de modale
-// $('.eqLogicAction[data-action=myModalExample]').off().on('click', function() {
-// 	$('#md_modal').dialog({
-// 	  title: "{{Configuration du plugin}}"
-// 	}).load('index.php?v=d&p=plugin&ajax=1&id=' + eqType).dialog('open')
-// })
-
 ?>
 
 <div class="row row-overflow">
