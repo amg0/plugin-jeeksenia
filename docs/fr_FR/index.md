@@ -38,3 +38,6 @@ KSenia Zone equipment
 
 after installation, the device appear on your dashboard this way
 ![ipxdevice](../images/kseniadevice.png)
+
+Clicking on the "Get events" dashboard button, shows a list of the alarm recent events in the modale dialog box
+![events](../images/events.png)
