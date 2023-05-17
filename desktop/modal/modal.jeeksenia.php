@@ -22,7 +22,7 @@ if (!isConnect('admin')) {
 sendVarToJs('CmdId', init('cmdid'));
 ?>
 
-Exemple de modale pour la commande <?=init('cmdid')?>
+Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 
 
 <div class="col-lg-12">
     <legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
