@@ -160,11 +160,3 @@ function addCmdToTable(_cmd) {
     }
   })
 }
-
-
-$('.eqLogicAction[data-action=myModalExample]').off().on('click', function() {
-	$('#md_modal').dialog({
-	  title: "{{Test de ma modale}}"
-	}).load('index.php?v=d&plugin=jeeksenia&modal=modal.jeeksenia').dialog('open')
-});
-

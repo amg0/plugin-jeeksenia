@@ -52,11 +52,6 @@ sendVarToJS('eqType', $plugin->getId());
 				<br>
 				<span>{{Configuration}}</span>
 			</div>
-			<div class="cursor eqLogicAction logoSecondary" data-action="myModalExample">
-				<i class="fas fa-bullseye"></i>
-				<br>
-				<span>{{My Modale}}</span>
-			</div>
 		</div>
 		<legend><i class="fas fa-table"></i> {{Mes équipements}}</legend>
 		<?php
