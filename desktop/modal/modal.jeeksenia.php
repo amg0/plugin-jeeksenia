@@ -20,20 +20,22 @@ if (!isConnect('admin')) {
     throw new Exception('{{401 - Accès non autorisé}}');
 }
 
-sendVarToJs('cmdid', init('cmdid'));
-sendVarToJs('eqLogic_id', init('eqLogic_id'));
-
-$eqLogic = eqLogic::byId(init('eqLogic_id'));
-$cmd = cmd::byEqLogicIdAndLogicalId(  init('eqLogic_id'),  'events' );
-$events = $cmd->execCmd();
+// $eqLogic = eqLogic::byId(init('eqLogic_id'));
+// $cmd = cmd::byEqLogicIdAndLogicalId(  init('eqLogic_id'),  'events' );
+// $events = $cmd->execCmd();
 
 sendVarToJs('cmdid', init('cmdid'));
 sendVarToJs('eqLogic_id', init('eqLogic_id'));
-sendVarToJs('events', json_encode($events));
-
+//sendVarToJs('testid', $eqLogic->getId());
 ?>
 
 Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 
+<?php
+    $eqLogics = eqLogic::byType('jeeksenia');
+    foreach ($eqLogics as $eqLogic) { 
+?>
+    <?= $eqLogic->getID() ?>
+<?php } ?>
 
 <div class="col-lg-12">
     <legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
