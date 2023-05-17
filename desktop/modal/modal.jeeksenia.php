@@ -25,16 +25,13 @@ if (!isConnect('admin')) {
 // $events = $cmd->execCmd();
 
 $eqid = init('eqLogic_id');
-sendVarToJs('cmdid', init('cmdid'));
-sendVarToJs('eqLogic_id', $eqid );
 $eqLogic = eqLogic::byId( $eqid );
 $cmd = cmd::byEqLogicIdAndLogicalId(  $eqid,  'events' );
-$value = json_decode($cmd->execCmd());
+$events = json_decode($cmd->execCmd());
 
-sendVarToJs('testeqid', $eqLogic->getId());
-sendVarToJs('testcmdid', $cmd->getId());
-sendVarToJs('testvalue', $value);
-
+//sendVarToJs('cmdid', init('cmdid'));
+sendVarToJs('eqLogic_id', $eqid );
+sendVarToJs('events', $events);
 ?>
 
 Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 
