@@ -43,7 +43,6 @@ Exemple de modale pour la commande <?=$cmd->getName()?> de l'equipement <?=$eqLo
     </div>
 </div>
 
-
 <?php include_file('desktop', 'modal', 'js', 'jeeksenia'); ?>
 <?php include_file('desktop', 'utils', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'jeeksenia', 'js', 'jeeksenia');?>
