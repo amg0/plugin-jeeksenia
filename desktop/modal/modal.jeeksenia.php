@@ -29,7 +29,7 @@ sendVarToJs('cmdid', init('cmdid'));
 sendVarToJs('eqLogic_id', $eqid );
 $eqLogic = eqLogic::byId( $eqid );
 $cmd = cmd::byEqLogicIdAndLogicalId(  $eqid,  'events' );
-$value = $cmd->execCmd();
+$value = json_decode($cmd->execCmd());
 
 sendVarToJs('testeqid', $eqLogic->getId());
 sendVarToJs('testcmdid', $cmd->getId());
