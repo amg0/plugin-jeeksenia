@@ -29,9 +29,12 @@ sendVarToJs('cmdid', init('cmdid'));
 sendVarToJs('eqLogic_id', $eqid );
 $eqLogic = eqLogic::byId( $eqid );
 $cmd = cmd::byEqLogicIdAndLogicalId(  $eqid,  'events' );
+$value = $cmd->execCmd();
 
 sendVarToJs('testeqid', $eqLogic->getId());
 sendVarToJs('testcmdid', $cmd->getId());
+sendVarToJs('testvalue', $value);
+
 ?>
 
 Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 
