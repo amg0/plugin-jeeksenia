@@ -16,6 +16,8 @@
 
 /* Permet la réorganisation des commandes dans l'équipement */
 
-console.log(cmdid);
+console.log('cmd GetEvent=',cmdid);
+console.log('eqLogic =',eqLogic_id);
+console.log('events =',events);
 
-alert(eqLogic_id);
+alert(events);
