@@ -34,8 +34,6 @@ sendVarToJs('eqLogic_id', $eqid );
 sendVarToJs('events', $events);
 ?>
 
-Exemple de modale pour la commande <?=$cmd->getName()?> de l'equipement <?=$eqLogic->getName()?> 
-
 <div class="col-lg-12">
     <legend><i class="far fa-calendar-alt"></i> {{Evenements}}</legend>
     <div class="table-responsive">
@@ -46,5 +44,3 @@ Exemple de modale pour la commande <?=$cmd->getName()?> de l'equipement <?=$eqLo
 <?php include_file('desktop', 'utils', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'jeeksenia', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'modal', 'js', 'jeeksenia'); ?>
-<!-- <?php include_file('core', 'plugin.template', 'js');?> -->
-
