@@ -22,6 +22,15 @@ if (!isConnect('admin')) {
 
 sendVarToJs('cmdid', init('cmdid'));
 sendVarToJs('eqLogic_id', init('eqLogic_id'));
+
+$eqLogic = eqLogic::byId(init('eqLogic_id'));
+$cmd = cmd::byEqLogicIdAndLogicalId(  init('eqLogic_id'),  'events' );
+$events = $cmd->execCmd();
+
+sendVarToJs('cmdid', init('cmdid'));
+sendVarToJs('eqLogic_id', init('eqLogic_id'));
+sendVarToJs('events', json_encode($events));
+
 ?>
 
 Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 
@@ -36,3 +45,5 @@ Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogi
 
 <?php include_file('desktop', 'modal', 'js', 'jeeksenia'); ?>
 <?php include_file('desktop', 'utils', 'js', 'jeeksenia');?>
+<?php include_file('desktop', 'jeeksenia', 'js', 'jeeksenia');?>
+<?php include_file('core', 'plugin.template', 'js');?>
