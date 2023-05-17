@@ -19,7 +19,14 @@
 if (!isConnect('admin')) {
     throw new Exception('{{401 - Accès non autorisé}}');
 }
-sendVarToJs('CmdId', init('cmdid'));
+
+$eqLogic = eqLogic::byId(init('eqLogic_id'));
+$cmd = $eqLogic->getCmd(null, 'events');
+$events = $cmd->execCmd();
+
+sendVarToJs('cmdid', init('cmdid'));
+sendVarToJs('eqLogic_id', init('eqLogic_id'));
+sendVarToJs('events', $events);
 ?>
 
 Exemple de modale pour la commande <?=init('cmdid')?> de l'eq id <?=init('eqLogic_id')?> 

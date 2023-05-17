@@ -16,4 +16,6 @@
 
 /* Permet la réorganisation des commandes dans l'équipement */
 
-console.log(CmdId);
+console.log(cmdid);
+
+alert(eqLogic_id);
