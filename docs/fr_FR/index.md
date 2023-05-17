@@ -16,19 +16,31 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 
 ## Commandes
 
-KSenia Root equipment
+### KSenia Root equipment
+
 - **Etat** : 1 si la connectivité fonctionne et que l'on recoit des donnees
 - **Présence** : compte le nombre de zone(s) qui detecte une presence ( 0 rien,  1 ou plus = le nombre de detecteur(s) avec présence confirmée)
 - **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares 16IP
 - **Product Version** : return the KSenia product version : High.Low.Build
+- **Events** : the last list of events downloaded from the alarm with the 'Show Event' action
+- **Show Events** : an action to trigger the refresh of the list of event. there is a custom widget for that command called jeeksenia::dispevent which enable clicking on that action button on the dashboard and open a model to display the list of events
 - **per each partition** : an info command for each partition that will contain the partition status
 - **per each scenario** : an action command is created for every single scenario programmed in the KSenia. the command's name is the scenario's name. triggering the action, will call the scenario in KSenia, based on the PIN code entered in the root equipement configuration
 
-Encryption: le `password` et le `pincode` sont encryptés dans la base de donnees.
+### KSenia Zone equipment
 
-KSenia Zone equipment
 - **Présence** : detection de présence ( 1 ) ou absence (0 )
 - **Etat** : Etat du capteur de la zone ( UN_BYPASS en mode normal , LOST si perdu )
+
+## Configuration
+
+- **IP** : ip address of the KSenia alarm
+- **Port** : port number of the KSenia alarm
+- **User Name** : user name credential
+- **Mot de passe** : le mot de passe
+- **PIN code** : le pin code pour activer les scenarios/partitions
+
+NOTE:  Encryption: le `password` et le `pincode` sont encryptés dans la base de donnees.
 
 ## Change Log
 
@@ -39,5 +51,5 @@ KSenia Zone equipment
 after installation, the device appear on your dashboard this way
 ![ipxdevice](../images/kseniadevice.png)
 
-Clicking on the "Get events" dashboard button, shows a list of the alarm recent events in the modale dialog box
+Clicking on the "Show events" dashboard button, shows a list of the alarm recent events in the modale dialog box
 ![events](../images/events.png)
