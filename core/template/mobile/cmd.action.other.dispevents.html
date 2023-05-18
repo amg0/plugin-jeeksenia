@@ -2,7 +2,6 @@
   <a class="action ui-btn ui-mini ui-btn-inline ui-btn-raised">#name_display#</a>
   <script>
     $('.cmd[data-cmd_uid=#uid#] .action').off('click').on('click', function () {
-       alert('cmd #id#');
        jeedom.cmd.execute({id: '#id#'});
        alert('eqlogic #eqLogic_id#');
        $('#md_modal').dialog({
