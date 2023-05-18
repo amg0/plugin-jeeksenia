@@ -44,4 +44,4 @@ sendVarToJs('events', $events);
 <?php include_file('desktop', 'utils', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'jeeksenia', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'events', 'js', 'jeeksenia'); ?>
-<?php include_file('desktop', 'datatable', 'js', 'jeeksenia');?>
+<!-- <?php include_file('desktop', 'datatable', 'js', 'jeeksenia');?> -->
