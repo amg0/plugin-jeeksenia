@@ -45,6 +45,4 @@ arr = $.map(events,function(v,i){
     );
   //html = MyArray2Table(arr,idcolumn,viscols,caption,cls,htmlid,bResponsive) 
   $("#jeeksenia-events").html( html );
-  $(document).ready(function () {
-    $('#jeeksenia-events').DataTable();
-});
+  $('#jeeksenia-events').DataTable();
