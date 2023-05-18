@@ -44,3 +44,4 @@ sendVarToJs('events', $events);
 <?php include_file('desktop', 'utils', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'jeeksenia', 'js', 'jeeksenia');?>
 <?php include_file('desktop', 'events', 'js', 'jeeksenia'); ?>
+<script src="https://cdn.datatables.net/v/bs/dt-1.13.4/datatables.min.js"></script>
