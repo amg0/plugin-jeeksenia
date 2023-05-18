@@ -3,11 +3,11 @@
   <script>
     $('.cmd[data-cmd_uid=#uid#] .action').off('click').on('click', function () {
        alert('cmd #id#');
-      //  jeedom.cmd.execute({id: '#id#'});
-      //  alert('eqlogic #eqLogic_id#');
-      //  $('#md_modal').dialog({
-      //   title: "{{Evenements}}"
-      // }).load('index.php?v=d&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#').dialog('open')
+       jeedom.cmd.execute({id: '#id#'});
+       alert('eqlogic #eqLogic_id#');
+       $('#md_modal').dialog({
+        title: "{{Evenements}}"
+      }).load('index.php?v=d&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#').dialog('open')
 
     })
   </script>
