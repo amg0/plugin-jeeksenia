@@ -5,7 +5,7 @@
       jeedom.cmd.execute({id: '#id#'});
 
       alert('eqlogic #eqLogic_id#');
-      alert( 'html elements for id md_modal:' );
+      alert( 'check if md_modal exists:' );
       alert (  $('#md_modal').length );
       if ( $('#md_modal').length ==0 ) {
         var thvirtuel_dialog = $('<div id="md_modal" title=""></div>').appendTo("body").dialog({ 
