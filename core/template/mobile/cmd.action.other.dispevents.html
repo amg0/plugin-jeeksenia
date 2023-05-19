@@ -8,14 +8,21 @@
       alert( 'html elements for id md_modal:' );
       alert (  $('#md_modal').length );
       if ( $('#md_modal').length ==0 ) {
-        $("body").append("<div id='md_modal'> </div>")
+        var thvirtuel_dialog = $('<div id="md_modal" title=""></div>').appendTo("body").dialog({ 
+          autoOpen: false,
+          modal: true,
+          resizable: true,
+          draggable: true,
+          width: "auto",
+          height: "auto",
+          dialogClass:"dialogStyle",
+          closeText: "",
+          closeOnEscape: true}
+        );
       }
       $('#md_modal').dialog({
         title: "{{Evenements}}"
       }).load('index.php?v=d&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#').dialog('open')
-
-      //page('index.php?v=d&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#','Image',null,'core',true)
-
     })
   </script>
 </span>
