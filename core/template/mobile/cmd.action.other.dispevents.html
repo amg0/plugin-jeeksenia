@@ -25,14 +25,14 @@
       }).load('index.php?v=d&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#');
 
       //Corrige l'erreur de position x
-      setTimeout(function () {
-        $('#md_modal').dialog('open');
-        //Corrige l'erreur de position y sur mobile Android
-        var box = $('#md_modal').closest('.ui-dialog');
-        var windowHeight = window.innerHeight;
-        var boxHeight = box.height();
-        box.css('top', window.scrollY+((windowHeight - boxHeight )/2));
-      }, 500);
+      // setTimeout(function () {
+      //   $('#md_modal').dialog('open');
+      //   //Corrige l'erreur de position y sur mobile Android
+      //   var box = $('#md_modal').closest('.ui-dialog');
+      //   var windowHeight = window.innerHeight;
+      //   var boxHeight = box.height();
+      //   box.css('top', window.scrollY+((windowHeight - boxHeight )/2));
+      // }, 500);
 
     })
   </script>
