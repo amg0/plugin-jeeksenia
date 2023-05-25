@@ -23,13 +23,11 @@
         ;
       }
 
-    $('.cmd[data-cmd_uid=#uid#] .action').on('click', function() {
-      page('index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#')
-    })
+      //page('index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#')
 
-      // $('#md_modal').dialog({
-      //   title: "{{Evenements}}"
-      // }).load('index.php?v=d&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#');
+      $('#md_modal').dialog({
+        title: "{{Evenements}}"
+      }).load('index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#');
 
       //Corrige l'erreur de position x
       // setTimeout(function () {
