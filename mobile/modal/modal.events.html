@@ -16,14 +16,6 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-if (!isConnect('admin')) {
-    throw new Exception('{{401 - Accès non autorisé}}');
-}
-
-// $eqLogic = eqLogic::byId(init('eqLogic_id'));
-// $cmd = cmd::byEqLogicIdAndLogicalId(  init('eqLogic_id'),  'events' );
-// $events = $cmd->execCmd();
-
 $eqid = init('eqLogic_id');
 $eqLogic = eqLogic::byId( $eqid );
 $cmd = cmd::byEqLogicIdAndLogicalId(  $eqid,  'events' );
