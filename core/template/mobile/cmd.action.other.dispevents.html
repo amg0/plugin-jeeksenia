@@ -4,10 +4,15 @@
     $('.cmd[data-cmd_uid=#uid#] .action').off('click').on('click', function () {
       jeedom.cmd.execute({id: '#id#'});
 
-      // alert('eqlogic #eqLogic_id#');
-      // alert( 'check if md_modal exists:' );
-      // alert (  $('#md_modal').length );
-      if ( $('#md_modal').length ==0 ) {
+    //function(_page, _title, _option, _plugin, _dialog) 
+    jeedomUtils.loadPage(
+      'index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#',
+      'events',
+      null,
+      'jeeksenia'
+    );
+
+/*       if ( $('#md_modal').length ==0 ) {
         var thvirtuel_dialog = $('<div id="md_modal" title=""></div>').appendTo("body")
         // .dialog({ 
         //   autoOpen: false,
@@ -21,13 +26,13 @@
         //   closeOnEscape: true}
         // )
         ;
-      }
+      } */
 
       //page('index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#')
 
-      $('#md_modal').dialog({
-        title: "{{Evenements}}"
-      }).load('index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#');
+      // $('#md_modal').dialog({
+      //   title: "{{Evenements}}"
+      // }).load('index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#');
 
       //Corrige l'erreur de position x
       // setTimeout(function () {
