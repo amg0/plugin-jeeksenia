@@ -5,12 +5,19 @@
       jeedom.cmd.execute({id: '#id#'});
 
     //function(_page, _title, _option, _plugin, _dialog) 
+/*
     jeedomUtils.loadPage(
       'index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#',
       'events',
       null,
       'jeeksenia'
     );
+*/
+    jeedomUtils.loadModal(
+      'index.php?v=m&plugin=jeeksenia&modal=modal.events&eqLogic_id=#eqLogic_id#&cmdid=#id#', 
+      function() {
+        alert('test');
+      });
     })
   </script>
 </span>
