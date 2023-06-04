@@ -34,6 +34,13 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares alarm
 
 ## Configuration
 
+### Plugin
+
+- **Fréquence de rafraichissement** : une frequence de rafraichissement en secondes. 10s marche bien. il ne faut pas trop solliciter la centrale mais il faut tout meme quelque chose d'assez reactif.
+
+
+### Equipement de base ( la centrale )
+
 - **Model KSenia** : simple choix entre un model 16ports ou 48ports. ( Choisir 48 ports fonctionne meme sur un modele 16ports , cela influe sur les urls utilisees pour parler a la centrale mais la centrale 16 ports supporte les urls 48 ports )
 - **IP** : ip address of the KSenia alarm
 - **Port** : port number of the KSenia alarm
