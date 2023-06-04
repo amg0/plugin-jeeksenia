@@ -360,7 +360,10 @@ public static function deamon_changeAutoMode($mode) {
 
 	private function xmlKSeniaHttpCall($actionxml) {
 		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' id:%s action:%s',$this->getId(),$actionxml));
-		$result = $this->KSeniaHttpCall($actionxml);
+		$portmodel =  $this->getConfiguration('portmodel','16');
+		$newaction = str_replace( '16' , $portmodel , $actionxml );
+		log::add(JEEKSENIA, 'debug', __METHOD__ .sprintf(' portmodel:%s newaction:%s',$portmodel, $newaction));
+		$result = $this->KSeniaHttpCall($newaction);
 		if (!$result['ok']) {
 			return null;
 		}

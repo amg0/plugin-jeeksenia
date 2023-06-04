@@ -149,6 +149,17 @@ sendVarToJS('eqType', $plugin->getId());
 							<div class="jeeksenia-root">
 								<legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
 								<div class="form-group">
+									<label class="col-sm-4 control-label">{{Model KSenia}}
+										<sup><i class="fas fa-question-circle tooltips" title="{{Choix entre le 16 ports ou le 48 ports}}"></i></sup>
+									</label>
+									<div class="col-sm-6">
+										<select class="eqLogicAttr form-control"  data-l1key="configuration" data-l2key="portmodel" placeholder="{{Modele}}">
+											<option selected>16</option>
+											<option>48</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-4 control-label">{{IP}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Renseignez l adresse IP de l'équipement}}"></i></sup>
 									</label>
