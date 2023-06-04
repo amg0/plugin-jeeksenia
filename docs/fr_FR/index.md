@@ -1,6 +1,6 @@
 # Plugin KSENIA LARES 16IP pour Jeedom V4 
 
-plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
+plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares alarm 
 
 
 
@@ -20,7 +20,7 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 
 - **Etat** : 1 si la connectivité fonctionne et que l'on recoit des donnees
 - **Présence** : compte le nombre de zone(s) qui detecte une presence ( 0 rien,  1 ou plus = le nombre de detecteur(s) avec présence confirmée)
-- **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares 16IP
+- **Product Name** : return the KSenia product name. this plugin only works for KSENIA lares ( should work for 16IP or 48IP )
 - **Product Version** : return the KSenia product version : High.Low.Build
 - **Events** : the last list of events downloaded from the alarm with the 'Show Event' action
 - **Show Events** : an action to trigger the refresh of the list of event. there is a custom widget for that command called jeeksenia::dispevent which enable clicking on that action button on the dashboard and open a model to display the list of events
@@ -34,6 +34,7 @@ plugin-jeeksenia is a Jeedom V4 plugin for the KSENIA lares 16IP alarm
 
 ## Configuration
 
+- **Model KSenia** : simple choix entre un model 16ports ou 48ports. ( Choisir 48 ports fonctionne meme sur un modele 16ports , cela influe sur les urls utilisees pour parler a la centrale mais la centrale 16 ports supporte les urls 48 ports )
 - **IP** : ip address of the KSenia alarm
 - **Port** : port number of the KSenia alarm
 - **User Name** : user name credential

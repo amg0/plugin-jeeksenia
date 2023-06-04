@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+## 06/06/2023
+- donne le choix 16 ou 48 dans la configuration de l'equipement 'centrale'. 
+
 ## 03/06/2023
 - affiche les evenements de la centrale depuis le dashboard directement avec le boutton Show Events
 
