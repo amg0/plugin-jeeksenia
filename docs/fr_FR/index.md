@@ -49,8 +49,11 @@ NOTE:  Encryption: le `password` et le `pincode` sont encryptés dans la base de
 
 ## Installation
 
-after installation, the device appear on your dashboard this way
+apres l'installation et la configuration de l'equipement de base pour la centrale, les zones et partitions sont automatiquement detectees et creer comme des equipements detecteurs de mouvement dans jeedom avec un etat 'Presence' de type générique PRESENCE
+![Equipements](../images/ksenia%20equipements.png)
+
+Le péripherique alarme apparait sur le dashboard de cette facon avec la possibilite de voir le status des partitions et de les armer/desarmer selon les 'scenarios' declarés dans l'alarme
 ![ipxdevice](../images/kseniadevice.png)
 
-Clicking on the "Show events" dashboard button, shows a list of the alarm recent events in the modale dialog box
+Cliquer sur le boutton "Show events" du dashboard button, permet de voir la liste des derniers evenements enregistrés par la centrale dans une boite modale
 ![events](../images/events.png)
