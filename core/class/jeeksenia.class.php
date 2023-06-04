@@ -432,7 +432,9 @@ public static function deamon_changeAutoMode($mode) {
 		if (is_object($xml)) {
 			$arr = $xml->xpath("//zone");
 			foreach( $arr as $key=>$zone ) {
-				$this->createOrUpdateChildEQ('security','zone','Z'.$key,1,1,$zone);
+				if (strlen($zone)>0) {
+					$this->createOrUpdateChildEQ('security','zone','Z'.$key,1,1,$zone);
+				}
 			}
 		} else
 			return false;
